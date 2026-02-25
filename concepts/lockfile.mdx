@@ -1,17 +1,17 @@
 ---
 title: Lock File
-description: How pbctl uses lock files for reproducible environments.
+description: How jnc uses lock files for reproducible environments.
 ---
 
 # Lock File
 
-pbctl automatically generates and maintains a `pixi.lock` file in your workspace. The lock file records the exact versions and hashes of every package resolved for each environment and platform, ensuring fully reproducible builds.
+jnc automatically generates and maintains a `pixi.lock` file in your workspace. The lock file records the exact versions and hashes of every package resolved for each environment and platform, ensuring fully reproducible builds.
 
 ## How it works
 
-1. When you run `pbctl add`, `pbctl install`, or any command that modifies dependencies, pbctl solves the environment and writes the results to `pixi.lock`.
+1. When you run `jnc add`, `jnc install`, or any command that modifies dependencies, jnc solves the environment and writes the results to `pixi.lock`.
 2. The lock file contains the exact version, build string, and content hash for every package.
-3. On subsequent installs, pbctl reads the lock file and installs the exact same packages — no re-solving required.
+3. On subsequent installs, jnc reads the lock file and installs the exact same packages — no re-solving required.
 
 ## Committing the lock file
 
@@ -27,7 +27,7 @@ pixi.lock     # Exact resolved versions (auto-generated)
 ### Update all dependencies
 
 ```bash
-pbctl update
+jnc update
 ```
 
 Re-solves all dependencies within the constraints defined in `pixi.toml` and updates the lock file.
@@ -35,13 +35,13 @@ Re-solves all dependencies within the constraints defined in `pixi.toml` and upd
 ### Update specific packages
 
 ```bash
-pbctl update numpy pandas
+jnc update numpy pandas
 ```
 
 ### Upgrade with loosened constraints
 
 ```bash
-pbctl upgrade numpy
+jnc upgrade numpy
 ```
 
 This loosens the version constraint in the manifest and re-solves.
@@ -53,7 +53,7 @@ This loosens the version constraint in the manifest and re-solves.
 Install exactly what's in the lock file, even if the manifest has changed:
 
 ```bash
-pbctl install --frozen
+jnc install --frozen
 ```
 
 ### Locked
@@ -61,7 +61,7 @@ pbctl install --frozen
 Install from the lock file, but abort if the lock file is out of date with the manifest:
 
 ```bash
-pbctl install --locked
+jnc install --locked
 ```
 
 This is useful in CI to catch lock file drift.

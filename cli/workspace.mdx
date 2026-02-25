@@ -1,18 +1,18 @@
 ---
-title: "pbctl workspace"
+title: "jnc workspace"
 description: "Modify workspace configuration including channels, platforms, environments, and more."
 ---
 
-# pbctl workspace
+# jnc workspace
 
 Modifies workspace configuration stored in `pixi.toml`. This command provides subcommands for managing channels, platforms, environments, features, versioning, and other workspace settings.
 
-**Alias:** `pbctl project`
+**Alias:** `jnc project`
 
 ## Usage
 
 ```bash
-pbctl workspace <SUBCOMMAND>
+jnc workspace <SUBCOMMAND>
 ```
 
 ## Subcommands
@@ -22,9 +22,9 @@ pbctl workspace <SUBCOMMAND>
 Manage conda channels for the workspace.
 
 ```bash
-pbctl workspace channel add <CHANNEL>...
-pbctl workspace channel list
-pbctl workspace channel remove <CHANNEL>...
+jnc workspace channel add <CHANNEL>...
+jnc workspace channel list
+jnc workspace channel remove <CHANNEL>...
 ```
 
 ### `description`
@@ -32,8 +32,8 @@ pbctl workspace channel remove <CHANNEL>...
 Get or set the workspace description.
 
 ```bash
-pbctl workspace description get
-pbctl workspace description set <DESCRIPTION>
+jnc workspace description get
+jnc workspace description set <DESCRIPTION>
 ```
 
 ### `platform`
@@ -41,9 +41,9 @@ pbctl workspace description set <DESCRIPTION>
 Manage target platforms for the workspace.
 
 ```bash
-pbctl workspace platform add <PLATFORM>...
-pbctl workspace platform list
-pbctl workspace platform remove <PLATFORM>...
+jnc workspace platform add <PLATFORM>...
+jnc workspace platform list
+jnc workspace platform remove <PLATFORM>...
 ```
 
 Platform: `linux-aarch64` (Jetson). Additional platforms will be supported in the future.
@@ -53,11 +53,11 @@ Platform: `linux-aarch64` (Jetson). Additional platforms will be supported in th
 Manage the workspace version.
 
 ```bash
-pbctl workspace version get
-pbctl workspace version set <VERSION>
-pbctl workspace version major    # Bump major version
-pbctl workspace version minor    # Bump minor version
-pbctl workspace version patch    # Bump patch version
+jnc workspace version get
+jnc workspace version set <VERSION>
+jnc workspace version major    # Bump major version
+jnc workspace version minor    # Bump minor version
+jnc workspace version patch    # Bump patch version
 ```
 
 ### `environment`
@@ -65,9 +65,9 @@ pbctl workspace version patch    # Bump patch version
 Manage environments in the workspace.
 
 ```bash
-pbctl workspace environment add <NAME> [OPTIONS]
-pbctl workspace environment list
-pbctl workspace environment remove <NAME>
+jnc workspace environment add <NAME> [OPTIONS]
+jnc workspace environment list
+jnc workspace environment remove <NAME>
 ```
 
 ### `feature`
@@ -75,8 +75,8 @@ pbctl workspace environment remove <NAME>
 Manage features in the workspace.
 
 ```bash
-pbctl workspace feature list
-pbctl workspace feature remove <NAME>
+jnc workspace feature list
+jnc workspace feature remove <NAME>
 ```
 
 ### `export`
@@ -84,8 +84,8 @@ pbctl workspace feature remove <NAME>
 Export the workspace environment to other formats.
 
 ```bash
-pbctl workspace export conda-environment [OPTIONS]
-pbctl workspace export conda-explicit-spec [OPTIONS]
+jnc workspace export conda-environment [OPTIONS]
+jnc workspace export conda-explicit-spec [OPTIONS]
 ```
 
 These commands produce output compatible with conda's environment and explicit specification formats, making it easy to share environments with users of other conda tools.
@@ -95,8 +95,8 @@ These commands produce output compatible with conda's environment and explicit s
 Get or set the workspace name.
 
 ```bash
-pbctl workspace name get
-pbctl workspace name set <NAME>
+jnc workspace name get
+jnc workspace name set <NAME>
 ```
 
 ### `system-requirements`
@@ -104,8 +104,8 @@ pbctl workspace name set <NAME>
 Manage system requirements for the workspace.
 
 ```bash
-pbctl workspace system-requirements add <REQUIREMENT>
-pbctl workspace system-requirements list
+jnc workspace system-requirements add <REQUIREMENT>
+jnc workspace system-requirements list
 ```
 
 ## Global Options
@@ -118,59 +118,59 @@ pbctl workspace system-requirements list
 
 ```bash
 # Add conda-forge and pytorch channels
-pbctl workspace channel add conda-forge pytorch
+jnc workspace channel add conda-forge pytorch
 
 # List configured channels
-pbctl workspace channel list
+jnc workspace channel list
 
 # Remove a channel
-pbctl workspace channel remove pytorch
+jnc workspace channel remove pytorch
 
 # Add target platforms
-pbctl workspace platform add linux-aarch64
+jnc workspace platform add linux-aarch64
 
 # List target platforms
-pbctl workspace platform list
+jnc workspace platform list
 
 # Set the workspace description
-pbctl workspace description set "My data science workspace"
+jnc workspace description set "My data science workspace"
 
 # Set the workspace version
-pbctl workspace version set 1.0.0
+jnc workspace version set 1.0.0
 
 # Bump the patch version (1.0.0 -> 1.0.1)
-pbctl workspace version patch
+jnc workspace version patch
 
 # Add a new environment with features
-pbctl workspace environment add test
+jnc workspace environment add test
 
 # List environments
-pbctl workspace environment list
+jnc workspace environment list
 
 # Remove an environment
-pbctl workspace environment remove test
+jnc workspace environment remove test
 
 # List features
-pbctl workspace feature list
+jnc workspace feature list
 
 # Export as a conda environment file
-pbctl workspace export conda-environment
+jnc workspace export conda-environment
 
 # Export as a conda explicit spec
-pbctl workspace export conda-explicit-spec
+jnc workspace export conda-explicit-spec
 
 # Get the workspace name
-pbctl workspace name get
+jnc workspace name get
 
 # Set the workspace name
-pbctl workspace name set my-project
+jnc workspace name set my-project
 
 # Add a system requirement
-pbctl workspace system-requirements add "cuda>=12.0"
+jnc workspace system-requirements add "cuda>=12.0"
 
 # List system requirements
-pbctl workspace system-requirements list
+jnc workspace system-requirements list
 
 # Use the project alias
-pbctl project channel list
+jnc project channel list
 ```

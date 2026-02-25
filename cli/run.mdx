@@ -1,22 +1,22 @@
 ---
-title: "pbctl run"
+title: "jnc run"
 description: "Run tasks or commands in the workspace environment."
 ---
 
-# pbctl run
+# jnc run
 
 Runs a task or shell command inside the activated workspace environment. The command can be a predefined task from the manifest or an arbitrary executable found in the environment's `PATH`.
 
 The environment is automatically installed and updated before execution if needed. Tasks defined in the manifest can depend on other tasks and will be executed in the correct topological order.
 
-If no task is provided, `pbctl run` prints a list of all available tasks.
+If no task is provided, `jnc run` prints a list of all available tasks.
 
 **Alias:** `r`
 
 ## Usage
 
 ```bash
-pbctl run [OPTIONS] [TASK]...
+jnc run [OPTIONS] [TASK]...
 ```
 
 ## Arguments
@@ -56,47 +56,47 @@ pbctl run [OPTIONS] [TASK]...
 ### Run a predefined task
 
 ```bash
-pbctl run test
+jnc run test
 ```
 
 ### Run an arbitrary command in the environment
 
 ```bash
-pbctl run python -c "print('Hello!')"
+jnc run python -c "print('Hello!')"
 ```
 
 ### Run a task in a specific environment
 
 ```bash
-pbctl run --environment test pytest -v
+jnc run --environment test pytest -v
 ```
 
 ### Chain multiple tasks
 
 ```bash
-pbctl run build test lint
+jnc run build test lint
 ```
 
 ### Run with a clean environment
 
 ```bash
-pbctl run --clean-env python my_script.py
+jnc run --clean-env python my_script.py
 ```
 
 ### Dry run to preview commands
 
 ```bash
-pbctl run --dry-run test
+jnc run --dry-run test
 ```
 
 ### Run a raw executable (bypass task resolution)
 
 ```bash
-pbctl run --executable python --version
+jnc run --executable python --version
 ```
 
 ### List all available tasks
 
 ```bash
-pbctl run
+jnc run
 ```

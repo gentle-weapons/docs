@@ -1,11 +1,11 @@
 ---
 title: Tasks
-description: Define and run cross-platform tasks with pbctl's built-in task runner.
+description: Define and run cross-platform tasks with jnc's built-in task runner.
 ---
 
 # Tasks
 
-pbctl includes a cross-platform task runner. Define tasks in your manifest and run them with `pbctl run`. Tasks execute inside the workspace environment with all dependencies available.
+jnc includes a cross-platform task runner. Define tasks in your manifest and run them with `jnc run`. Tasks execute inside the workspace environment with all dependencies available.
 
 ## Defining tasks
 
@@ -34,14 +34,14 @@ cmd = "python -m build"
 ## Running tasks
 
 ```bash
-pbctl run test
-pbctl run lint
+jnc run test
+jnc run lint
 ```
 
 You can also run arbitrary commands (not just defined tasks):
 
 ```bash
-pbctl run python -c "print('hello')"
+jnc run python -c "print('hello')"
 ```
 
 ## Task dependencies
@@ -60,7 +60,7 @@ depends-on = ["build"]
 depends-on = ["lint", "test"]
 ```
 
-Running `pbctl run ci` will execute `lint` and `test` (and their dependencies) before `ci`.
+Running `jnc run ci` will execute `lint` and `test` (and their dependencies) before `ci`.
 
 ## Environment-specific tasks
 
@@ -77,8 +77,8 @@ docs = "sphinx-build docs/ docs/_build"
 Run them by targeting the environment:
 
 ```bash
-pbctl run --environment test test
-pbctl run --environment docs docs
+jnc run --environment test test
+jnc run --environment docs docs
 ```
 
 ## Platform-specific tasks
@@ -93,9 +93,9 @@ setup = "bash setup.sh"
 ## Managing tasks with the CLI
 
 ```bash
-pbctl task add start "python main.py"          # Add a task
-pbctl task add test "pytest" --depends-on build # Add with dependency
-pbctl task remove start                         # Remove a task
-pbctl task list                                 # List all tasks
-pbctl task alias ci lint test                   # Create a task alias
+jnc task add start "python main.py"          # Add a task
+jnc task add test "pytest" --depends-on build # Add with dependency
+jnc task remove start                         # Remove a task
+jnc task list                                 # List all tasks
+jnc task alias ci lint test                   # Create a task alias
 ```

@@ -1,22 +1,22 @@
 ---
-title: "pbctl install"
+title: "jnc install"
 description: "Install an environment, updating the lock file if needed."
 ---
 
-# pbctl install
+# jnc install
 
 Installs an environment by resolving dependencies and populating the environment prefix. If the lock file is not up-to-date with the manifest, it will be updated first.
 
 By default, only the `default` environment is installed. Use `--environment` to install a specific environment, or `--all` to install every environment defined in the workspace.
 
-Running `pbctl install` is not strictly required before other commands like `pbctl run` or `pbctl shell` -- those commands automatically install the environment if needed. Use `pbctl install` when you want to explicitly prepare an environment ahead of time.
+Running `jnc install` is not strictly required before other commands like `jnc run` or `jnc shell` -- those commands automatically install the environment if needed. Use `jnc install` when you want to explicitly prepare an environment ahead of time.
 
 **Alias:** `i`
 
 ## Usage
 
 ```bash
-pbctl install [OPTIONS]
+jnc install [OPTIONS]
 ```
 
 ## Options
@@ -42,35 +42,35 @@ pbctl install [OPTIONS]
 ### Install the default environment
 
 ```bash
-pbctl install
+jnc install
 ```
 
 ### Install a specific environment
 
 ```bash
-pbctl install --environment test
+jnc install --environment test
 ```
 
 ### Install all environments
 
 ```bash
-pbctl install --all
+jnc install --all
 ```
 
 ### Install using the lock file without updating
 
 ```bash
-pbctl install --frozen
+jnc install --frozen
 ```
 
 ### Install while skipping a package
 
 ```bash
-pbctl install --skip large-package
+jnc install --skip large-package
 ```
 
 ### Install only specific packages and their dependencies
 
 ```bash
-pbctl install --only python --only numpy
+jnc install --only python --only numpy
 ```

@@ -1,16 +1,16 @@
 ---
-title: "pbctl search"
+title: "jnc search"
 description: "Search for packages in conda channels."
 ---
 
-# pbctl search
+# jnc search
 
 Searches for conda packages in configured channels. When given an exact package name, it displays detailed information about the latest version including dependencies, license, and available builds. Supports wildcard patterns to search across package names.
 
 ## Usage
 
 ```bash
-pbctl search [OPTIONS] <PACKAGE>
+jnc search [OPTIONS] <PACKAGE>
 ```
 
 ## Arguments
@@ -38,29 +38,29 @@ pbctl search [OPTIONS] <PACKAGE>
 Search for a specific package:
 
 ```bash
-pbctl search python
+jnc search python
 ```
 
 Search with a wildcard pattern:
 
 ```bash
-pbctl search "py*"
+jnc search "py*"
 ```
 
 Limit search results:
 
 ```bash
-pbctl search --limit 10 "numpy*"
+jnc search --limit 10 "numpy*"
 ```
 
 Search in a specific channel:
 
 ```bash
-pbctl search --channel bioconda samtools
+jnc search --channel bioconda samtools
 ```
 
 Search for a different platform:
 
 ```bash
-pbctl search --platform linux-aarch64 cuda-toolkit
+jnc search --platform linux-aarch64 cuda-toolkit
 ```

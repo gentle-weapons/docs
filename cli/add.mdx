@@ -1,9 +1,9 @@
 ---
-title: "pbctl add"
+title: "jnc add"
 description: "Add conda or PyPI dependencies to the workspace."
 ---
 
-# pbctl add
+# jnc add
 
 Adds dependencies to the workspace. Dependencies can be conda packages (default) or PyPI packages (with `--pypi`). If no version is specified, the latest compatible version is chosen automatically.
 
@@ -14,7 +14,7 @@ Versions are pinned using a strategy based on semantic versioning by default. So
 ## Usage
 
 ```bash
-pbctl add [OPTIONS] <SPEC>...
+jnc add [OPTIONS] <SPEC>...
 ```
 
 ## Arguments
@@ -68,49 +68,49 @@ pbctl add [OPTIONS] <SPEC>...
 ### Add a conda package
 
 ```bash
-pbctl add python
+jnc add python
 ```
 
 ### Add a conda package with a version constraint
 
 ```bash
-pbctl add "python=3.12"
-pbctl add "numpy>=1.24"
+jnc add "python=3.12"
+jnc add "numpy>=1.24"
 ```
 
 ### Add multiple packages at once
 
 ```bash
-pbctl add python numpy pandas scikit-learn
+jnc add python numpy pandas scikit-learn
 ```
 
 ### Add a PyPI package
 
 ```bash
-pbctl add --pypi requests
-pbctl add --pypi "boto3>=1.28"
+jnc add --pypi requests
+jnc add --pypi "boto3>=1.28"
 ```
 
 ### Add a platform-specific dependency
 
 ```bash
-pbctl add cudatoolkit --platform linux-aarch64
+jnc add cudatoolkit --platform linux-aarch64
 ```
 
 ### Add a dependency to a feature
 
 ```bash
-pbctl add --feature test pytest pytest-cov
+jnc add --feature test pytest pytest-cov
 ```
 
 ### Add a git-based dependency
 
 ```bash
-pbctl add --git https://github.com/user/repo --branch main mypackage
+jnc add --git https://github.com/user/repo --branch main mypackage
 ```
 
 ### Add an editable PyPI dependency
 
 ```bash
-pbctl add --pypi --editable "mylib @ file:///path/to/mylib"
+jnc add --pypi --editable "mylib @ file:///path/to/mylib"
 ```

@@ -1,16 +1,16 @@
 ---
-title: "pbctl config"
-description: "Manage pbctl configuration files at system, global, and local scopes."
+title: "jnc config"
+description: "Manage jnc configuration files at system, global, and local scopes."
 ---
 
-# pbctl config
+# jnc config
 
-Manages pbctl configuration files. Configuration can be set at three scopes: **system** (machine-wide), **global** (user-wide), and **local** (workspace-specific via `pixi.toml`).
+Manages jnc configuration files. Configuration can be set at three scopes: **system** (machine-wide), **global** (user-wide), and **local** (workspace-specific via `pixi.toml`).
 
 ## Usage
 
 ```bash
-pbctl config <SUBCOMMAND>
+jnc config <SUBCOMMAND>
 ```
 
 ## Subcommands
@@ -20,10 +20,10 @@ pbctl config <SUBCOMMAND>
 Open the configuration file in your default editor.
 
 ```bash
-pbctl config edit
-pbctl config edit --system
-pbctl config edit --global
-pbctl config edit --local
+jnc config edit
+jnc config edit --system
+jnc config edit --global
+jnc config edit --local
 ```
 
 ### `list`
@@ -31,7 +31,7 @@ pbctl config edit --local
 Display current configuration values.
 
 ```bash
-pbctl config list [OPTIONS]
+jnc config list [OPTIONS]
 ```
 
 | Option | Description |
@@ -46,7 +46,7 @@ pbctl config list [OPTIONS]
 Set a configuration value.
 
 ```bash
-pbctl config set <KEY> <VALUE>
+jnc config set <KEY> <VALUE>
 ```
 
 ### `unset`
@@ -54,7 +54,7 @@ pbctl config set <KEY> <VALUE>
 Remove a configuration value.
 
 ```bash
-pbctl config unset <KEY>
+jnc config unset <KEY>
 ```
 
 ### `append`
@@ -62,7 +62,7 @@ pbctl config unset <KEY>
 Append a value to a list-type configuration key.
 
 ```bash
-pbctl config append <KEY> <VALUE>
+jnc config append <KEY> <VALUE>
 ```
 
 ### `prepend`
@@ -70,7 +70,7 @@ pbctl config append <KEY> <VALUE>
 Prepend a value to a list-type configuration key.
 
 ```bash
-pbctl config prepend <KEY> <VALUE>
+jnc config prepend <KEY> <VALUE>
 ```
 
 ## Global Options
@@ -93,20 +93,20 @@ When the same key is set at multiple scopes, the most specific scope wins: local
 
 ```bash
 # Set the default channel globally
-pbctl config set default-channels '["conda-forge"]'
+jnc config set default-channels '["conda-forge"]'
 
 # List all configuration values as JSON
-pbctl config list --json
+jnc config list --json
 
 # Add a channel to the default list
-pbctl config append default-channels bioconda
+jnc config append default-channels bioconda
 
 # Remove a configuration value
-pbctl config unset default-channels
+jnc config unset default-channels
 
 # Edit the global configuration file
-pbctl config edit --global
+jnc config edit --global
 
 # View only local (workspace) configuration
-pbctl config list --local
+jnc config list --local
 ```

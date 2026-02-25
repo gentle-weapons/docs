@@ -1,16 +1,16 @@
 ---
-title: "pbctl global"
+title: "jnc global"
 description: "Install and manage globally available packages in isolated environments."
 ---
 
-# pbctl global
+# jnc global
 
 Manages global package installations. Each package (or group of packages) is installed into its own isolated environment, and exposed binaries are placed on your `PATH`. This is similar to tools like `pipx` or `apt`, but powered by the conda ecosystem.
 
 ## Usage
 
 ```bash
-pbctl global <SUBCOMMAND>
+jnc global <SUBCOMMAND>
 ```
 
 ## Subcommands
@@ -20,7 +20,7 @@ pbctl global <SUBCOMMAND>
 Install one or more packages into new global environments.
 
 ```bash
-pbctl global install [OPTIONS] <PACKAGES>...
+jnc global install [OPTIONS] <PACKAGES>...
 ```
 
 | Option | Short | Description |
@@ -35,7 +35,7 @@ pbctl global install [OPTIONS] <PACKAGES>...
 Remove one or more global environments and their exposed binaries.
 
 ```bash
-pbctl global uninstall <ENVIRONMENTS>...
+jnc global uninstall <ENVIRONMENTS>...
 ```
 
 ### `add`
@@ -43,7 +43,7 @@ pbctl global uninstall <ENVIRONMENTS>...
 Add packages to an existing global environment.
 
 ```bash
-pbctl global add [OPTIONS] <PACKAGES>...
+jnc global add [OPTIONS] <PACKAGES>...
 ```
 
 | Option | Short | Description |
@@ -57,7 +57,7 @@ pbctl global add [OPTIONS] <PACKAGES>...
 Remove packages from a global environment.
 
 ```bash
-pbctl global remove <PACKAGES>... --environment <ENV>
+jnc global remove <PACKAGES>... --environment <ENV>
 ```
 
 ### `list`
@@ -65,7 +65,7 @@ pbctl global remove <PACKAGES>... --environment <ENV>
 List all global environments and their exposed binaries.
 
 ```bash
-pbctl global list
+jnc global list
 ```
 
 ### `sync`
@@ -73,7 +73,7 @@ pbctl global list
 Synchronize installed global environments with the global manifest file. This installs missing environments and removes ones no longer in the manifest.
 
 ```bash
-pbctl global sync
+jnc global sync
 ```
 
 ### `edit`
@@ -81,7 +81,7 @@ pbctl global sync
 Open the global manifest file in your default editor.
 
 ```bash
-pbctl global edit
+jnc global edit
 ```
 
 ### `update`
@@ -89,7 +89,7 @@ pbctl global edit
 Update one or more global environments to the latest compatible versions.
 
 ```bash
-pbctl global update [OPTIONS] [ENVIRONMENTS]...
+jnc global update [OPTIONS] [ENVIRONMENTS]...
 ```
 
 | Option | Short | Description |
@@ -103,7 +103,7 @@ If no environments are specified, all global environments are updated.
 Display the dependency tree for a global environment.
 
 ```bash
-pbctl global tree --environment <ENV>
+jnc global tree --environment <ENV>
 ```
 
 ### `expose add`
@@ -111,7 +111,7 @@ pbctl global tree --environment <ENV>
 Expose additional binaries from a global environment on your `PATH`.
 
 ```bash
-pbctl global expose add --environment <ENV> <MAPPING>...
+jnc global expose add --environment <ENV> <MAPPING>...
 ```
 
 Mappings can be a binary name (e.g., `python3.12`) or a rename mapping (e.g., `py=python3.12`).
@@ -121,7 +121,7 @@ Mappings can be a binary name (e.g., `python3.12`) or a rename mapping (e.g., `p
 Remove exposed binaries from a global environment.
 
 ```bash
-pbctl global expose remove --environment <ENV> <NAMES>...
+jnc global expose remove --environment <ENV> <NAMES>...
 ```
 
 ### `shortcut add`
@@ -129,7 +129,7 @@ pbctl global expose remove --environment <ENV> <NAMES>...
 Create a shortcut command that runs a specific binary from a global environment.
 
 ```bash
-pbctl global shortcut add --environment <ENV> <NAME> <COMMAND>
+jnc global shortcut add --environment <ENV> <NAME> <COMMAND>
 ```
 
 ### `shortcut remove`
@@ -137,58 +137,58 @@ pbctl global shortcut add --environment <ENV> <NAME> <COMMAND>
 Remove a shortcut from a global environment.
 
 ```bash
-pbctl global shortcut remove --environment <ENV> <NAME>
+jnc global shortcut remove --environment <ENV> <NAME>
 ```
 
 ## Global Manifest
 
-Global environments are tracked in `~/.pixi/manifests/pixi-global.toml`. You can edit this file directly with `pbctl global edit` or share it across machines and run `pbctl global sync` to replicate your setup.
+Global environments are tracked in `~/.pixi/manifests/pixi-global.toml`. You can edit this file directly with `jnc global edit` or share it across machines and run `jnc global sync` to replicate your setup.
 
 ## Examples
 
 ```bash
 # Install common CLI tools
-pbctl global install gh ripgrep bat fd-find
+jnc global install gh ripgrep bat fd-find
 
 # Install from a specific channel
-pbctl global install --channel bioconda samtools
+jnc global install --channel bioconda samtools
 
 # Install multiple packages into a shared environment
-pbctl global install --environment data-tools python pandas jupyter
+jnc global install --environment data-tools python pandas jupyter
 
 # Add a package to an existing environment
-pbctl global add --environment data-tools matplotlib
+jnc global add --environment data-tools matplotlib
 
 # Remove a package from an environment
-pbctl global remove pandas --environment data-tools
+jnc global remove pandas --environment data-tools
 
 # Uninstall a global environment
-pbctl global uninstall ripgrep
+jnc global uninstall ripgrep
 
 # List all global environments
-pbctl global list
+jnc global list
 
 # Update all global environments
-pbctl global update
+jnc global update
 
 # Update a specific environment
-pbctl global update gh
+jnc global update gh
 
 # View the dependency tree
-pbctl global tree --environment gh
+jnc global tree --environment gh
 
 # Expose a specific binary
-pbctl global expose add --environment python python3.12
+jnc global expose add --environment python python3.12
 
 # Create a shortcut
-pbctl global shortcut add --environment python py "python3.12"
+jnc global shortcut add --environment python py "python3.12"
 
 # Remove an exposed binary
-pbctl global expose remove --environment python python3.12
+jnc global expose remove --environment python python3.12
 
 # Edit the global manifest directly
-pbctl global edit
+jnc global edit
 
 # Sync environments with the manifest
-pbctl global sync
+jnc global sync
 ```

@@ -1,16 +1,16 @@
 ---
-title: "pbctl upload"
+title: "jnc upload"
 description: "Upload conda packages to a channel or package repository."
 ---
 
-# pbctl upload
+# jnc upload
 
-Uploads built conda packages to various channel backends. Use this after `pbctl build` to publish packages.
+Uploads built conda packages to various channel backends. Use this after `jnc build` to publish packages.
 
 ## Usage
 
 ```bash
-pbctl upload <SUBCOMMAND> <PACKAGE_FILE>
+jnc upload <SUBCOMMAND> <PACKAGE_FILE>
 ```
 
 ## Subcommands
@@ -20,7 +20,7 @@ pbctl upload <SUBCOMMAND> <PACKAGE_FILE>
 Upload a package to a [prefix.dev](https://prefix.dev) channel.
 
 ```bash
-pbctl upload prefix <PACKAGE_FILE> --channel <CHANNEL>
+jnc upload prefix <PACKAGE_FILE> --channel <CHANNEL>
 ```
 
 ### `anaconda`
@@ -28,7 +28,7 @@ pbctl upload prefix <PACKAGE_FILE> --channel <CHANNEL>
 Upload a package to [Anaconda.org](https://anaconda.org).
 
 ```bash
-pbctl upload anaconda <PACKAGE_FILE> --owner <OWNER>
+jnc upload anaconda <PACKAGE_FILE> --owner <OWNER>
 ```
 
 ### `quetz`
@@ -36,7 +36,7 @@ pbctl upload anaconda <PACKAGE_FILE> --owner <OWNER>
 Upload a package to a [Quetz](https://github.com/mamba-org/quetz) server.
 
 ```bash
-pbctl upload quetz <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
+jnc upload quetz <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
 ```
 
 ### `artifactory`
@@ -44,7 +44,7 @@ pbctl upload quetz <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
 Upload a package to a JFrog Artifactory conda repository.
 
 ```bash
-pbctl upload artifactory <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
+jnc upload artifactory <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
 ```
 
 ### `s3`
@@ -52,7 +52,7 @@ pbctl upload artifactory <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
 Upload a package to an S3-compatible bucket.
 
 ```bash
-pbctl upload s3 <PACKAGE_FILE> --bucket <BUCKET> --region <REGION>
+jnc upload s3 <PACKAGE_FILE> --bucket <BUCKET> --region <REGION>
 ```
 
 ### `conda-forge`
@@ -60,25 +60,25 @@ pbctl upload s3 <PACKAGE_FILE> --bucket <BUCKET> --region <REGION>
 Upload a package to conda-forge via the conda-forge staging process.
 
 ```bash
-pbctl upload conda-forge <PACKAGE_FILE>
+jnc upload conda-forge <PACKAGE_FILE>
 ```
 
 ## Examples
 
 ```bash
 # Build and upload to prefix.dev
-pbctl build --output-dir ./dist
-pbctl upload prefix ./dist/my-package-1.0.0.conda --channel my-channel
+jnc build --output-dir ./dist
+jnc upload prefix ./dist/my-package-1.0.0.conda --channel my-channel
 
 # Upload to Anaconda.org
-pbctl upload anaconda ./dist/my-package-1.0.0.conda --owner my-org
+jnc upload anaconda ./dist/my-package-1.0.0.conda --owner my-org
 
 # Upload to a self-hosted Quetz server
-pbctl upload quetz ./dist/my-package-1.0.0.conda --url https://quetz.example.com --channel main
+jnc upload quetz ./dist/my-package-1.0.0.conda --url https://quetz.example.com --channel main
 
 # Upload to Artifactory
-pbctl upload artifactory ./dist/my-package-1.0.0.conda --url https://artifactory.example.com --channel conda-local
+jnc upload artifactory ./dist/my-package-1.0.0.conda --url https://artifactory.example.com --channel conda-local
 
 # Upload to S3
-pbctl upload s3 ./dist/my-package-1.0.0.conda --bucket my-conda-packages --region us-east-1
+jnc upload s3 ./dist/my-package-1.0.0.conda --bucket my-conda-packages --region us-east-1
 ```

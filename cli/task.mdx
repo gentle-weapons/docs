@@ -1,16 +1,16 @@
 ---
-title: "pbctl task"
+title: "jnc task"
 description: "Add, remove, alias, and list tasks in the workspace manifest."
 ---
 
-# pbctl task
+# jnc task
 
 Manages tasks defined in the workspace manifest. Tasks are commands that run inside the workspace environment and can depend on other tasks.
 
 ## Usage
 
 ```bash
-pbctl task <SUBCOMMAND>
+jnc task <SUBCOMMAND>
 ```
 
 ## Subcommands
@@ -20,7 +20,7 @@ pbctl task <SUBCOMMAND>
 Add a new task to the manifest.
 
 ```bash
-pbctl task add <NAME> <COMMAND> [OPTIONS]
+jnc task add <NAME> <COMMAND> [OPTIONS]
 ```
 
 | Option | Short | Description |
@@ -38,7 +38,7 @@ pbctl task add <NAME> <COMMAND> [OPTIONS]
 Remove one or more tasks from the manifest.
 
 ```bash
-pbctl task remove <NAMES>... [OPTIONS]
+jnc task remove <NAMES>... [OPTIONS]
 ```
 
 | Option | Short | Description |
@@ -51,7 +51,7 @@ pbctl task remove <NAMES>... [OPTIONS]
 Create a task alias that depends on other tasks. An alias has no command of its own -- it simply runs its dependencies.
 
 ```bash
-pbctl task alias <NAME> <DEPENDS_ON>... [OPTIONS]
+jnc task alias <NAME> <DEPENDS_ON>... [OPTIONS]
 ```
 
 | Option | Short | Description |
@@ -65,7 +65,7 @@ pbctl task alias <NAME> <DEPENDS_ON>... [OPTIONS]
 List all tasks defined in the manifest.
 
 ```bash
-pbctl task list [OPTIONS]
+jnc task list [OPTIONS]
 ```
 
 | Option | Short | Description |
@@ -83,38 +83,38 @@ pbctl task list [OPTIONS]
 
 ```bash
 # Add a simple task
-pbctl task add build "make build"
+jnc task add build "make build"
 
 # Add a task with a dependency
-pbctl task add test "pytest tests/" --depends-on build
+jnc task add test "pytest tests/" --depends-on build
 
 # Add a platform-specific task
-pbctl task add setup "bash setup.sh" --platform linux-aarch64
+jnc task add setup "bash setup.sh" --platform linux-aarch64
 
 # Add a task to a feature
-pbctl task add lint "ruff check ." --feature dev
+jnc task add lint "ruff check ." --feature dev
 
 # Add a task with environment variables and a working directory
-pbctl task add serve "python -m http.server" --cwd ./dist --env PORT=80
+jnc task add serve "python -m http.server" --cwd ./dist --env PORT=80
 
 # Add a task with a description
-pbctl task add docs "sphinx-build docs/ docs/_build" --description "Build documentation"
+jnc task add docs "sphinx-build docs/ docs/_build" --description "Build documentation"
 
 # Create an alias that runs multiple tasks
-pbctl task alias ci lint test build
+jnc task alias ci lint test build
 
 # Remove a task
-pbctl task remove build
+jnc task remove build
 
 # Remove a platform-specific task
-pbctl task remove setup --platform linux-aarch64
+jnc task remove setup --platform linux-aarch64
 
 # List all tasks
-pbctl task list
+jnc task list
 
 # List tasks for a specific environment
-pbctl task list --environment test
+jnc task list --environment test
 
 # Show a summary of tasks
-pbctl task list --summary
+jnc task list --summary
 ```

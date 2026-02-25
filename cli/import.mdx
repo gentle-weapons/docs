@@ -1,9 +1,9 @@
 ---
-title: "pbctl import"
+title: "jnc import"
 description: "Import an environment file into a workspace."
 ---
 
-# pbctl import
+# jnc import
 
 Imports a file into an environment in an existing workspace. Supports conda `environment.yml` files and pip `requirements.txt` files. The imported dependencies, channels, and platforms are added to the workspace manifest.
 
@@ -12,7 +12,7 @@ If `--format` is not specified, each supported format is tried in order until on
 ## Usage
 
 ```bash
-pbctl import [OPTIONS] <FILE>
+jnc import [OPTIONS] <FILE>
 ```
 
 ## Arguments
@@ -41,23 +41,23 @@ pbctl import [OPTIONS] <FILE>
 Import a conda environment file:
 
 ```bash
-pbctl import environment.yml
+jnc import environment.yml
 ```
 
 Import into a named environment:
 
 ```bash
-pbctl import --environment ml environment.yml
+jnc import --environment ml environment.yml
 ```
 
 Import a pip requirements file:
 
 ```bash
-pbctl import --format pypi-txt --environment web requirements.txt
+jnc import --format pypi-txt --environment web requirements.txt
 ```
 
 Import with specific platforms:
 
 ```bash
-pbctl import --platform linux-aarch64 environment.yml
+jnc import --platform linux-aarch64 environment.yml
 ```

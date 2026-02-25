@@ -1,16 +1,16 @@
 ---
-title: "pbctl completion"
-description: "Generate shell completion scripts for pbctl."
+title: "jnc completion"
+description: "Generate shell completion scripts for jnc."
 ---
 
-# pbctl completion
+# jnc completion
 
-Generates shell completion scripts for pbctl. Completions provide tab-completion for commands, subcommands, options, and arguments in your shell.
+Generates shell completion scripts for jnc. Completions provide tab-completion for commands, subcommands, options, and arguments in your shell.
 
 ## Usage
 
 ```bash
-pbctl completion --shell <SHELL>
+jnc completion --shell <SHELL>
 ```
 
 ## Options
@@ -35,7 +35,7 @@ pbctl completion --shell <SHELL>
 Add to your `~/.bashrc`:
 
 ```bash
-eval "$(pbctl completion --shell bash)"
+eval "$(jnc completion --shell bash)"
 ```
 
 ### Fish
@@ -43,7 +43,7 @@ eval "$(pbctl completion --shell bash)"
 Save to the Fish completions directory:
 
 ```bash
-pbctl completion --shell fish > ~/.config/fish/completions/pbctl.fish
+jnc completion --shell fish > ~/.config/fish/completions/jnc.fish
 ```
 
 ### Zsh
@@ -51,13 +51,13 @@ pbctl completion --shell fish > ~/.config/fish/completions/pbctl.fish
 Add to your `~/.zshrc`:
 
 ```bash
-eval "$(pbctl completion --shell zsh)"
+eval "$(jnc completion --shell zsh)"
 ```
 
 Or save to a file in your `fpath`:
 
 ```bash
-pbctl completion --shell zsh > ~/.zfunc/_pbctl
+jnc completion --shell zsh > ~/.zfunc/_jnc
 ```
 
 Make sure `~/.zfunc` is in your `fpath` (add `fpath=(~/.zfunc $fpath)` to `~/.zshrc` before `compinit`).
@@ -67,5 +67,5 @@ Make sure `~/.zfunc` is in your `fpath` (add `fpath=(~/.zfunc $fpath)` to `~/.zs
 Add to your `~/.elvish/rc.elv`:
 
 ```bash
-eval (pbctl completion --shell elvish | slurp)
+eval (jnc completion --shell elvish | slurp)
 ```

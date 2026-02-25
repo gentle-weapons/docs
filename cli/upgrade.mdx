@@ -1,18 +1,18 @@
 ---
-title: "pbctl upgrade"
+title: "jnc upgrade"
 description: "Upgrade dependencies with loosened version constraints."
 ---
 
-# pbctl upgrade
+# jnc upgrade
 
-Checks if there are newer versions of dependencies and upgrades them by loosening the version constraints in the manifest file. Unlike `pbctl update`, which respects existing version constraints, `upgrade` temporarily removes version pins to find the latest available versions, then updates both the lock file and the manifest.
+Checks if there are newer versions of dependencies and upgrades them by loosening the version constraints in the manifest file. Unlike `jnc update`, which respects existing version constraints, `upgrade` temporarily removes version pins to find the latest available versions, then updates both the lock file and the manifest.
 
 By default, all features and their dependencies are upgraded.
 
 ## Usage
 
 ```bash
-pbctl upgrade [OPTIONS] [PACKAGES]...
+jnc upgrade [OPTIONS] [PACKAGES]...
 ```
 
 ## Arguments
@@ -44,35 +44,35 @@ pbctl upgrade [OPTIONS] [PACKAGES]...
 Upgrade all dependencies:
 
 ```bash
-pbctl upgrade
+jnc upgrade
 ```
 
 Upgrade specific packages:
 
 ```bash
-pbctl upgrade python numpy
+jnc upgrade python numpy
 ```
 
 Upgrade only in a specific feature:
 
 ```bash
-pbctl upgrade --feature cuda
+jnc upgrade --feature cuda
 ```
 
 Upgrade everything except certain packages:
 
 ```bash
-pbctl upgrade --exclude python
+jnc upgrade --exclude python
 ```
 
 Preview changes without applying:
 
 ```bash
-pbctl upgrade --dry-run
+jnc upgrade --dry-run
 ```
 
 Output changes as JSON:
 
 ```bash
-pbctl upgrade --json
+jnc upgrade --json
 ```

@@ -1,15 +1,15 @@
 ---
 title: Environments
-description: How pbctl manages environments and features within a workspace.
+description: How jnc manages environments and features within a workspace.
 ---
 
 # Environments
 
-A pbctl workspace can contain multiple **environments**, each composed of one or more **features**. This system lets you maintain separate dependency sets for different purposes (development, testing, production) within a single workspace.
+A jnc workspace can contain multiple **environments**, each composed of one or more **features**. This system lets you maintain separate dependency sets for different purposes (development, testing, production) within a single workspace.
 
 ## Default environment
 
-Every workspace has a `default` environment that includes the `default` feature. When you run `pbctl add python`, the package is added to the default feature and is available in the default environment.
+Every workspace has a `default` environment that includes the `default` feature. When you run `jnc add python`, the package is added to the default feature and is available in the default environment.
 
 ```toml
 [dependencies]
@@ -32,8 +32,8 @@ sphinx = ">=7.0,<8"
 Add packages to a feature:
 
 ```bash
-pbctl add --feature test pytest
-pbctl add --feature docs sphinx
+jnc add --feature test pytest
+jnc add --feature docs sphinx
 ```
 
 ## Composing environments
@@ -53,15 +53,15 @@ The `test` environment includes everything from both `default` and `test` featur
 Target a specific environment with most commands:
 
 ```bash
-pbctl run --environment test pytest
-pbctl shell --environment docs
-pbctl list --environment test
-pbctl install --environment test
+jnc run --environment test pytest
+jnc shell --environment docs
+jnc list --environment test
+jnc install --environment test
 ```
 
 ## Environment installation
 
-When you run `pbctl install`, all environments are solved and installed. Each environment gets its own isolated set of packages. Packages shared across environments are deduplicated on disk using hard links or reflinks.
+When you run `jnc install`, all environments are solved and installed. Each environment gets its own isolated set of packages. Packages shared across environments are deduplicated on disk using hard links or reflinks.
 
 ## Platform support
 

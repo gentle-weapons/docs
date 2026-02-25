@@ -1,16 +1,16 @@
 ---
-title: "pbctl probe"
+title: "jnc probe"
 description: "Detect NVIDIA Jetson hardware and report system profile information."
 ---
 
-# pbctl probe
+# jnc probe
 
 Detects NVIDIA Jetson hardware on the current system and reports a detailed hardware profile. Use this command to verify that your Jetson device is recognized correctly before setting up workspaces, configuring system requirements, or troubleshooting platform-specific issues.
 
 ## Usage
 
 ```bash
-pbctl probe [OPTIONS]
+jnc probe [OPTIONS]
 ```
 
 ## Options
@@ -43,7 +43,7 @@ Currently supports the Jetson Orin Nano with JetPack 6 (L4T R36.x). Support for 
 ### Jetson Orin Nano
 
 ```bash
-pbctl probe
+jnc probe
 ```
 
 ```json
@@ -62,7 +62,7 @@ pbctl probe
 On a system without Jetson hardware, the command returns a profile with null values for hardware-specific fields:
 
 ```bash
-pbctl probe
+jnc probe
 ```
 
 ```json
@@ -78,11 +78,11 @@ pbctl probe
 
 ## Integration with System Requirements
 
-You can use the L4T version reported by `pbctl probe` to configure system requirements in your `pixi.toml`. This ensures that packages requiring a specific L4T release are resolved correctly:
+You can use the L4T version reported by `jnc probe` to configure system requirements in your `pixi.toml`. This ensures that packages requiring a specific L4T release are resolved correctly:
 
 ```toml
 [system-requirements]
 l4t = "36.4.0"
 ```
 
-Run `pbctl probe` first to confirm the L4T version on your device, then set the value in `pixi.toml` to match.
+Run `jnc probe` first to confirm the L4T version on your device, then set the value in `pixi.toml` to match.

@@ -1,16 +1,16 @@
 ---
-title: "pbctl tree"
+title: "jnc tree"
 description: "Show a tree of workspace dependencies."
 ---
 
-# pbctl tree
+# jnc tree
 
 Displays a tree view of workspace dependencies. Direct dependencies specified in the manifest are highlighted in green. Conda package versions are shown in yellow and PyPI versions in blue.
 
 ## Usage
 
 ```bash
-pbctl tree [OPTIONS] [REGEX]
+jnc tree [OPTIONS] [REGEX]
 ```
 
 **Alias:** `t`
@@ -43,29 +43,29 @@ pbctl tree [OPTIONS] [REGEX]
 Show the full dependency tree:
 
 ```bash
-pbctl tree
+jnc tree
 ```
 
 Filter to a specific package and its dependencies:
 
 ```bash
-pbctl tree numpy
+jnc tree numpy
 ```
 
 Show what depends on a specific package (inverted tree):
 
 ```bash
-pbctl tree --invert openssl
+jnc tree --invert openssl
 ```
 
 Show the tree for a specific environment:
 
 ```bash
-pbctl tree --environment test
+jnc tree --environment test
 ```
 
 Show the tree for a different platform:
 
 ```bash
-pbctl tree --platform linux-aarch64
+jnc tree --platform linux-aarch64
 ```

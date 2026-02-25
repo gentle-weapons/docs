@@ -1,9 +1,9 @@
 ---
-title: "pbctl init"
+title: "jnc init"
 description: "Create a new workspace with a manifest file and project scaffolding."
 ---
 
-# pbctl init
+# jnc init
 
 Creates a new workspace. This command generates a manifest file (`pixi.toml` by default) and supporting files to get you started with dependency management and task running.
 
@@ -12,7 +12,7 @@ The manifest format can be customized with `--format` to generate a `pyproject.t
 ## Usage
 
 ```bash
-pbctl init [OPTIONS] [PATH]
+jnc init [OPTIONS] [PATH]
 ```
 
 ## Arguments
@@ -37,41 +37,41 @@ pbctl init [OPTIONS] [PATH]
 ### Create a workspace in the current directory
 
 ```bash
-pbctl init
+jnc init
 ```
 
 ### Create a workspace in a new directory
 
 ```bash
-pbctl init my-project
+jnc init my-project
 ```
 
 ### Create a workspace with specific channels
 
 ```bash
-pbctl init --channel conda-forge --channel bioconda
+jnc init --channel conda-forge --channel bioconda
 ```
 
 ### Create a workspace for specific platforms
 
 ```bash
-pbctl init --platform linux-aarch64
+jnc init --platform linux-aarch64
 ```
 
 ### Create a pyproject.toml-based workspace
 
 ```bash
-pbctl init --format pyproject
+jnc init --format pyproject
 ```
 
 ### Bootstrap from an existing environment.yml
 
 ```bash
-pbctl init --import environment.yml
+jnc init --import environment.yml
 ```
 
 ### Create a workspace with GitHub SCM files
 
 ```bash
-pbctl init --scm github my-project
+jnc init --scm github my-project
 ```

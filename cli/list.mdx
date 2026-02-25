@@ -1,16 +1,16 @@
 ---
-title: "pbctl list"
+title: "jnc list"
 description: "List packages in the environment."
 ---
 
-# pbctl list
+# jnc list
 
 Lists all packages installed in the environment. Packages that are explicitly defined in the workspace manifest are highlighted. Supports filtering by regex, sorting, JSON output, and field selection.
 
 ## Usage
 
 ```bash
-pbctl list [OPTIONS] [REGEX]
+jnc list [OPTIONS] [REGEX]
 ```
 
 **Alias:** `ls`
@@ -46,41 +46,41 @@ pbctl list [OPTIONS] [REGEX]
 List all packages in the default environment:
 
 ```bash
-pbctl list
+jnc list
 ```
 
 Filter packages by name:
 
 ```bash
-pbctl list "numpy.*"
+jnc list "numpy.*"
 ```
 
 List packages in a specific environment:
 
 ```bash
-pbctl list --environment test
+jnc list --environment test
 ```
 
 Output as JSON:
 
 ```bash
-pbctl list --json
+jnc list --json
 ```
 
 Sort by size:
 
 ```bash
-pbctl list --sort-by size
+jnc list --sort-by size
 ```
 
 Show only explicitly requested packages:
 
 ```bash
-pbctl list --explicit
+jnc list --explicit
 ```
 
 Choose which fields to display:
 
 ```bash
-pbctl list --fields name,version,license,size
+jnc list --fields name,version,license,size
 ```

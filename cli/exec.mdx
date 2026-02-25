@@ -1,18 +1,18 @@
 ---
-title: "pbctl exec"
+title: "jnc exec"
 description: "Run a command in a temporary environment."
 ---
 
-# pbctl exec
+# jnc exec
 
 Runs a command in a temporary, isolated environment. The required packages are automatically installed into a cached environment and the command is executed within it. This is useful for one-off commands without creating a full workspace.
 
-Temporary environments are cached for reuse. Clear them with `pbctl clean cache --exec`.
+Temporary environments are cached for reuse. Clear them with `jnc clean cache --exec`.
 
 ## Usage
 
 ```bash
-pbctl exec [OPTIONS] <COMMAND> [ARGS]...
+jnc exec [OPTIONS] <COMMAND> [ARGS]...
 ```
 
 **Alias:** `x`
@@ -40,35 +40,35 @@ pbctl exec [OPTIONS] <COMMAND> [ARGS]...
 Run Python in a temporary environment:
 
 ```bash
-pbctl exec python
+jnc exec python
 ```
 
 Run Python with a specific version:
 
 ```bash
-pbctl exec --spec "python=3.12" python -- -c "print('hello')"
+jnc exec --spec "python=3.12" python -- -c "print('hello')"
 ```
 
 Run a command with additional packages:
 
 ```bash
-pbctl exec --with numpy python -- -c "import numpy; print(numpy.__version__)"
+jnc exec --with numpy python -- -c "import numpy; print(numpy.__version__)"
 ```
 
 Use a specific channel:
 
 ```bash
-pbctl exec --channel conda-forge --spec "nodejs=20" node -- --version
+jnc exec --channel conda-forge --spec "nodejs=20" node -- --version
 ```
 
 Force a fresh environment:
 
 ```bash
-pbctl exec --force-reinstall python
+jnc exec --force-reinstall python
 ```
 
 List packages in the temporary environment before running:
 
 ```bash
-pbctl exec --list python
+jnc exec --list python
 ```

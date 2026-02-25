@@ -1,6 +1,6 @@
 # Gentle Weapons Documentation
 
-pbctl documentation — a fast, reproducible package manager for NVIDIA Jetson.
+jnc documentation — a fast, reproducible package manager for NVIDIA Jetson.
 
 ## Local preview
 

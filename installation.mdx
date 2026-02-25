@@ -1,6 +1,6 @@
 ---
 title: Installation
-description: How to install pbctl on your NVIDIA Jetson device.
+description: How to install jnc on your NVIDIA Jetson device.
 ---
 
 # Installation
@@ -23,7 +23,7 @@ If your system doesn't have `curl`, use `wget`:
 wget -qO- https://pixi.sh/install.sh | sh
 ```
 
-This downloads the latest pbctl binary, places it in `~/.pixi/bin`, and adds it to your `PATH`.
+This downloads the latest jnc binary, places it in `~/.pixi/bin`, and adds it to your `PATH`.
 
 <Warning>
 Restart your terminal after installation for the `PATH` changes to take effect.
@@ -31,11 +31,11 @@ Restart your terminal after installation for the `PATH` changes to take effect.
 
 ## Verify Installation
 
-After restarting your terminal, verify pbctl is installed and detect your Jetson hardware:
+After restarting your terminal, verify jnc is installed and detect your Jetson hardware:
 
 ```bash
-pbctl --version
-pbctl probe
+jnc --version
+jnc probe
 ```
 
 The `probe` command should report your Orin Nano hardware, L4T version, JetPack version, and CUDA capabilities.
@@ -44,11 +44,11 @@ The `probe` command should report your Orin Nano hardware, L4T version, JetPack 
 
 ### Download From GitHub Releases
 
-pbctl is a single executable with no external dependencies. Download the `aarch64` archive from the [GitHub releases](https://github.com/prefix-dev/pixi/releases), unpack it, and add it to your `PATH`.
+jnc is a single executable with no external dependencies. Download the `aarch64` archive from the [GitHub releases](https://github.com/prefix-dev/pixi/releases), unpack it, and add it to your `PATH`.
 
 ### Install From Source
 
-pbctl is written in Rust and can be built with cargo:
+jnc is written in Rust and can be built with cargo:
 
 ```bash
 cargo install --locked --git https://github.com/prefix-dev/pixi.git pixi
@@ -78,7 +78,7 @@ After installing, enable shell autocompletion:
 
 Add to `~/.bashrc`:
 ```bash
-eval "$(pbctl completion --shell bash)"
+eval "$(jnc completion --shell bash)"
 ```
 
 </Tab>
@@ -87,7 +87,7 @@ eval "$(pbctl completion --shell bash)"
 Add to `~/.zshrc`:
 ```zsh
 autoload -Uz compinit && compinit
-eval "$(pbctl completion --shell zsh)"
+eval "$(jnc completion --shell zsh)"
 ```
 
 </Tab>
@@ -95,7 +95,7 @@ eval "$(pbctl completion --shell zsh)"
 
 Add to `~/.config/fish/config.fish`:
 ```fish
-pbctl completion --shell fish | source
+jnc completion --shell fish | source
 ```
 
 </Tab>
@@ -105,13 +105,13 @@ pbctl completion --shell fish | source
 
 1. Remove cached data:
    ```bash
-   pbctl clean cache
+   jnc clean cache
    ```
 2. Remove environments from your workspaces:
    ```bash
-   cd path/to/workspace && pbctl clean
+   cd path/to/workspace && jnc clean
    ```
-3. Remove pbctl and its global environments:
+3. Remove jnc and its global environments:
    ```bash
    rm -r ~/.pixi
    ```

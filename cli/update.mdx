@@ -1,9 +1,9 @@
 ---
-title: "pbctl update"
+title: "jnc update"
 description: "Update dependencies in the lock file."
 ---
 
-# pbctl update
+# jnc update
 
 Checks if there are newer versions of dependencies and updates the `pixi.lock` file and environments accordingly. Only updates packages to versions still compatible with the version constraints defined in the manifest.
 
@@ -12,7 +12,7 @@ If no packages are specified, all packages are updated. You can scope updates to
 ## Usage
 
 ```bash
-pbctl update [OPTIONS] [PACKAGES]...
+jnc update [OPTIONS] [PACKAGES]...
 ```
 
 ## Arguments
@@ -42,35 +42,35 @@ pbctl update [OPTIONS] [PACKAGES]...
 Update all packages:
 
 ```bash
-pbctl update
+jnc update
 ```
 
 Update specific packages:
 
 ```bash
-pbctl update python numpy
+jnc update python numpy
 ```
 
 Update only in a specific environment:
 
 ```bash
-pbctl update --environment test
+jnc update --environment test
 ```
 
 Preview changes without applying them:
 
 ```bash
-pbctl update --dry-run
+jnc update --dry-run
 ```
 
 Update for a specific platform:
 
 ```bash
-pbctl update --platform linux-aarch64
+jnc update --platform linux-aarch64
 ```
 
 Output changes as JSON:
 
 ```bash
-pbctl update --json
+jnc update --json
 ```

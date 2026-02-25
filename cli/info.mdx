@@ -1,9 +1,9 @@
 ---
-title: "pbctl info"
+title: "jnc info"
 description: "Show information about the system, workspace, and environments."
 ---
 
-# pbctl info
+# jnc info
 
 Displays information about the current system, workspace, and environments. This includes the platform, virtual packages, cache location, authentication storage path, global tool directories, workspace details, and environment configurations.
 
@@ -12,7 +12,7 @@ When run outside a workspace, only system and global information is shown.
 ## Usage
 
 ```bash
-pbctl info [OPTIONS]
+jnc info [OPTIONS]
 ```
 
 ## Options
@@ -56,17 +56,17 @@ The command displays sections depending on context:
 Show basic info:
 
 ```bash
-pbctl info
+jnc info
 ```
 
 Show extended info with sizes:
 
 ```bash
-pbctl info --extended
+jnc info --extended
 ```
 
 Output as JSON for scripting:
 
 ```bash
-pbctl info --json
+jnc info --json
 ```

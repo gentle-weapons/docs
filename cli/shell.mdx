@@ -1,9 +1,9 @@
 ---
-title: "pbctl shell"
+title: "jnc shell"
 description: "Start an interactive shell in the workspace environment."
 ---
 
-# pbctl shell
+# jnc shell
 
 Starts an interactive shell session with the workspace environment activated. All packages installed in the environment are available on the `PATH`, and environment variables are set as if the environment were natively active.
 
@@ -16,7 +16,7 @@ The environment is automatically installed and updated before the shell starts, 
 ## Usage
 
 ```bash
-pbctl shell [OPTIONS]
+jnc shell [OPTIONS]
 ```
 
 ## Options
@@ -45,23 +45,23 @@ pbctl shell [OPTIONS]
 ### Start a shell in the default environment
 
 ```bash
-pbctl shell
+jnc shell
 ```
 
 ### Start a shell in a specific environment
 
 ```bash
-pbctl shell --environment cuda
+jnc shell --environment cuda
 ```
 
 ### Start a shell without updating the lock file
 
 ```bash
-pbctl shell --frozen
+jnc shell --frozen
 ```
 
 ### Start a shell without any updates or installs
 
 ```bash
-pbctl shell --as-is
+jnc shell --as-is
 ```

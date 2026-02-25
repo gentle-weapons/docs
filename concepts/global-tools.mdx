@@ -1,16 +1,16 @@
 ---
 title: Global Tools
-description: Install and manage globally available CLI tools with pbctl.
+description: Install and manage globally available CLI tools with jnc.
 ---
 
 # Global Tools
 
-pbctl can install tools globally in isolated environments, making them available from anywhere on your system. This is similar to tools like `apt` or `pipx`, but uses the conda ecosystem.
+jnc can install tools globally in isolated environments, making them available from anywhere on your system. This is similar to tools like `apt` or `pipx`, but uses the conda ecosystem.
 
 ## Installing tools
 
 ```bash
-pbctl global install gh ripgrep bat
+jnc global install gh ripgrep bat
 ```
 
 Each tool gets its own isolated environment, so dependencies never conflict between tools.
@@ -20,25 +20,25 @@ Each tool gets its own isolated environment, so dependencies never conflict betw
 ### Add a package to an existing environment
 
 ```bash
-pbctl global add --environment gh gh-dash
+jnc global add --environment gh gh-dash
 ```
 
 ### List installed environments
 
 ```bash
-pbctl global list
+jnc global list
 ```
 
 ### Update all global environments
 
 ```bash
-pbctl global update
+jnc global update
 ```
 
 ### Remove a global tool
 
 ```bash
-pbctl global uninstall ripgrep
+jnc global uninstall ripgrep
 ```
 
 ## The global manifest
@@ -46,26 +46,26 @@ pbctl global uninstall ripgrep
 Global installations are tracked in a manifest file at `~/.pixi/manifests/pixi-global.toml`. You can edit it directly:
 
 ```bash
-pbctl global edit
+jnc global edit
 ```
 
 Or sync the installed environments to match the manifest:
 
 ```bash
-pbctl global sync
+jnc global sync
 ```
 
-This makes it easy to share your global tool configuration across machines — just copy the manifest and run `pbctl global sync`.
+This makes it easy to share your global tool configuration across machines — just copy the manifest and run `jnc global sync`.
 
 ## Exposed binaries
 
-When you install a global tool, pbctl automatically exposes the package's binaries on your `PATH` via lightweight trampolines in `~/.pixi/bin/`.
+When you install a global tool, jnc automatically exposes the package's binaries on your `PATH` via lightweight trampolines in `~/.pixi/bin/`.
 
 You can manage which binaries are exposed:
 
 ```bash
-pbctl global expose add --environment python python3.12
-pbctl global expose remove --environment python python3.12
+jnc global expose add --environment python python3.12
+jnc global expose remove --environment python python3.12
 ```
 
 ## Shortcuts
@@ -73,8 +73,8 @@ pbctl global expose remove --environment python python3.12
 Create shortcut commands for tools:
 
 ```bash
-pbctl global shortcut add --environment python py python3.12
-pbctl global shortcut remove --environment python py
+jnc global shortcut add --environment python py python3.12
+jnc global shortcut remove --environment python py
 ```
 
 ## Dependency tree
@@ -82,5 +82,5 @@ pbctl global shortcut remove --environment python py
 View the dependency tree of a global environment:
 
 ```bash
-pbctl global tree --environment gh
+jnc global tree --environment gh
 ```

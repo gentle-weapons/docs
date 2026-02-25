@@ -1,20 +1,20 @@
 ---
-title: "pbctl auth"
+title: "jnc auth"
 description: "Manage authentication for conda channels."
 ---
 
-# pbctl auth
+# jnc auth
 
 Manages authentication credentials for private conda channels. Credentials are stored in the system's authentication storage and are used automatically when accessing authenticated channels.
 
 ## Subcommands
 
-### `pbctl auth login`
+### `jnc auth login`
 
 Stores authentication credentials for a host.
 
 ```bash
-pbctl auth login [OPTIONS] <HOST>
+jnc auth login [OPTIONS] <HOST>
 ```
 
 #### Arguments
@@ -32,12 +32,12 @@ pbctl auth login [OPTIONS] <HOST>
 | `--password <PASS>` | Password for basic HTTP authentication. |
 | `--conda-token <TOKEN>` | Use a conda token for authentication (token is included in the URL path). |
 
-### `pbctl auth logout`
+### `jnc auth logout`
 
 Removes stored credentials for a host.
 
 ```bash
-pbctl auth logout <HOST>
+jnc auth logout <HOST>
 ```
 
 #### Arguments
@@ -51,23 +51,23 @@ pbctl auth logout <HOST>
 Authenticate with a token:
 
 ```bash
-pbctl auth login repo.example.com --token my-secret-token
+jnc auth login repo.example.com --token my-secret-token
 ```
 
 Authenticate with username and password:
 
 ```bash
-pbctl auth login repo.example.com --username user --password pass
+jnc auth login repo.example.com --username user --password pass
 ```
 
 Authenticate with a conda token:
 
 ```bash
-pbctl auth login repo.example.com --conda-token t-abc123
+jnc auth login repo.example.com --conda-token t-abc123
 ```
 
 Remove stored credentials:
 
 ```bash
-pbctl auth logout repo.example.com
+jnc auth logout repo.example.com
 ```

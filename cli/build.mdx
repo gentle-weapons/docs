@@ -1,16 +1,16 @@
 ---
-title: "pbctl build"
+title: "jnc build"
 description: "Build a conda package from the workspace."
 ---
 
-# pbctl build
+# jnc build
 
 Builds a conda package from the workspace. This uses the build configuration defined in `pixi.toml` to produce a `.conda` package file that can be uploaded to a channel or installed elsewhere.
 
 ## Usage
 
 ```bash
-pbctl build [OPTIONS]
+jnc build [OPTIONS]
 ```
 
 ## Options
@@ -24,11 +24,11 @@ pbctl build [OPTIONS]
 
 ```bash
 # Build a package in the current directory
-pbctl build
+jnc build
 
 # Build and place the output in a specific directory
-pbctl build --output-dir ./dist
+jnc build --output-dir ./dist
 
 # Build using a specific manifest
-pbctl build --manifest-path /path/to/pixi.toml
+jnc build --manifest-path /path/to/pixi.toml
 ```

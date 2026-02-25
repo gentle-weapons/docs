@@ -1,9 +1,9 @@
 ---
-title: "pbctl remove"
+title: "jnc remove"
 description: "Remove dependencies from the workspace."
 ---
 
-# pbctl remove
+# jnc remove
 
 Removes dependencies from the workspace manifest and updates the lock file accordingly. Supports removing both conda and PyPI dependencies.
 
@@ -14,7 +14,7 @@ When the workspace manifest is a `pyproject.toml`, removing a PyPI dependency wi
 ## Usage
 
 ```bash
-pbctl remove [OPTIONS] <DEPS>...
+jnc remove [OPTIONS] <DEPS>...
 ```
 
 ## Arguments
@@ -57,29 +57,29 @@ pbctl remove [OPTIONS] <DEPS>...
 ### Remove a conda package
 
 ```bash
-pbctl remove numpy
+jnc remove numpy
 ```
 
 ### Remove multiple packages
 
 ```bash
-pbctl remove numpy pandas scikit-learn
+jnc remove numpy pandas scikit-learn
 ```
 
 ### Remove a PyPI package
 
 ```bash
-pbctl remove --pypi requests
+jnc remove --pypi requests
 ```
 
 ### Remove a platform-specific dependency
 
 ```bash
-pbctl remove cudatoolkit --platform linux-aarch64
+jnc remove cudatoolkit --platform linux-aarch64
 ```
 
 ### Remove a dependency from a feature
 
 ```bash
-pbctl remove --feature test pytest
+jnc remove --feature test pytest
 ```

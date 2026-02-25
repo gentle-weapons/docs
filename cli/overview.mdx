@@ -1,11 +1,11 @@
 ---
 title: "CLI Reference"
-description: "Complete reference for all pbctl commands."
+description: "Complete reference for all jnc commands."
 ---
 
 # CLI Reference
 
-pbctl provides a comprehensive set of commands for managing workspaces, dependencies, environments, and tasks.
+jnc provides a comprehensive set of commands for managing workspaces, dependencies, environments, and tasks.
 
 ## Global Options
 
@@ -25,68 +25,68 @@ These options are available on every command:
 
 | Command | Alias | Description |
 |---|---|---|
-| [`pbctl init`](/cli/init) | | Create a new workspace |
-| [`pbctl install`](/cli/install) | `i` | Install an environment, updating the lockfile if needed |
-| [`pbctl reinstall`](/cli/reinstall) | | Re-install an environment with optional package filtering |
-| [`pbctl lock`](/cli/lock) | | Solve the environment and update the lock file without installing |
-| [`pbctl import`](/cli/import) | | Import an environment from a conda `environment.yml` file |
-| [`pbctl info`](/cli/info) | | Show workspace and system information |
-| [`pbctl clean`](/cli/clean) | | Remove workspace environments and caches |
+| [`jnc init`](/cli/init) | | Create a new workspace |
+| [`jnc install`](/cli/install) | `i` | Install an environment, updating the lockfile if needed |
+| [`jnc reinstall`](/cli/reinstall) | | Re-install an environment with optional package filtering |
+| [`jnc lock`](/cli/lock) | | Solve the environment and update the lock file without installing |
+| [`jnc import`](/cli/import) | | Import an environment from a conda `environment.yml` file |
+| [`jnc info`](/cli/info) | | Show workspace and system information |
+| [`jnc clean`](/cli/clean) | | Remove workspace environments and caches |
 
 ### Dependencies
 
 | Command | Alias | Description |
 |---|---|---|
-| [`pbctl add`](/cli/add) | `a` | Add dependencies to the workspace |
-| [`pbctl remove`](/cli/remove) | `rm` | Remove dependencies from the workspace |
-| [`pbctl update`](/cli/update) | | Update dependencies in the lock file |
-| [`pbctl upgrade`](/cli/upgrade) | | Upgrade dependencies with loosened version constraints |
-| [`pbctl list`](/cli/list) | `ls` | List packages installed in the environment |
-| [`pbctl tree`](/cli/tree) | `t` | Show a dependency tree |
-| [`pbctl search`](/cli/search) | | Search for packages in configured channels |
+| [`jnc add`](/cli/add) | `a` | Add dependencies to the workspace |
+| [`jnc remove`](/cli/remove) | `rm` | Remove dependencies from the workspace |
+| [`jnc update`](/cli/update) | | Update dependencies in the lock file |
+| [`jnc upgrade`](/cli/upgrade) | | Upgrade dependencies with loosened version constraints |
+| [`jnc list`](/cli/list) | `ls` | List packages installed in the environment |
+| [`jnc tree`](/cli/tree) | `t` | Show a dependency tree |
+| [`jnc search`](/cli/search) | | Search for packages in configured channels |
 
 ### Tasks and Execution
 
 | Command | Alias | Description |
 |---|---|---|
-| [`pbctl run`](/cli/run) | `r` | Run a task or command in the environment |
-| [`pbctl exec`](/cli/exec) | `x` | Run a command in a temporary environment |
-| [`pbctl task`](/cli/task) | | Manage workspace tasks (add, remove, list, alias) |
+| [`jnc run`](/cli/run) | `r` | Run a task or command in the environment |
+| [`jnc exec`](/cli/exec) | `x` | Run a command in a temporary environment |
+| [`jnc task`](/cli/task) | | Manage workspace tasks (add, remove, list, alias) |
 
 ### Shell
 
 | Command | Alias | Description |
 |---|---|---|
-| [`pbctl shell`](/cli/shell) | `s` | Start an interactive shell in the environment |
-| [`pbctl shell-hook`](/cli/shell-hook) | | Print the environment activation script |
+| [`jnc shell`](/cli/shell) | `s` | Start an interactive shell in the environment |
+| [`jnc shell-hook`](/cli/shell-hook) | | Print the environment activation script |
 
 ### Global Tools
 
 | Command | Alias | Description |
 |---|---|---|
-| [`pbctl global`](/cli/global) | `g` | Manage globally installed tools in isolated environments |
+| [`jnc global`](/cli/global) | `g` | Manage globally installed tools in isolated environments |
 
 ### Workspace Configuration
 
 | Command | Description |
 |---|---|
-| [`pbctl workspace`](/cli/workspace) | Manage workspace settings (platforms, channels, environments, features) |
-| [`pbctl config`](/cli/config) | View or edit pbctl configuration |
-| [`pbctl auth`](/cli/auth) | Manage conda channel authentication |
+| [`jnc workspace`](/cli/workspace) | Manage workspace settings (platforms, channels, environments, features) |
+| [`jnc config`](/cli/config) | View or edit jnc configuration |
+| [`jnc auth`](/cli/auth) | Manage conda channel authentication |
 
 ### Build and Publish
 
 | Command | Description |
 |---|---|
-| [`pbctl build`](/cli/build) | Build a conda package from the workspace |
-| [`pbctl upload`](/cli/upload) | Upload a package to a channel |
+| [`jnc build`](/cli/build) | Build a conda package from the workspace |
+| [`jnc upload`](/cli/upload) | Upload a package to a channel |
 
 ### Utilities
 
 | Command | Description |
 |---|---|
-| [`pbctl completion`](/cli/completion) | Generate shell completion scripts |
-| [`pbctl probe`](/cli/probe) | Detect hardware capabilities (e.g., NVIDIA Jetson) |
+| [`jnc completion`](/cli/completion) | Generate shell completion scripts |
+| [`jnc probe`](/cli/probe) | Detect hardware capabilities (e.g., NVIDIA Jetson) |
 
 ## Update Options
 

@@ -1,9 +1,9 @@
 ---
-title: "pbctl shell-hook"
+title: "jnc shell-hook"
 description: "Print the environment activation script for use in shell configurations."
 ---
 
-# pbctl shell-hook
+# jnc shell-hook
 
 Prints the shell activation script for a workspace environment. You can source this script to activate the environment in your current shell without starting a new shell session.
 
@@ -12,7 +12,7 @@ This is useful for integrating environment activation into CI pipelines, Makefil
 ## Usage
 
 ```bash
-pbctl shell-hook [OPTIONS]
+jnc shell-hook [OPTIONS]
 ```
 
 ## Options
@@ -43,45 +43,45 @@ pbctl shell-hook [OPTIONS]
 ### Activate in the current bash session
 
 ```bash
-eval "$(pbctl shell-hook)"
+eval "$(jnc shell-hook)"
 ```
 
 ### Generate a script for a specific shell
 
 ```bash
-pbctl shell-hook --shell zsh
+jnc shell-hook --shell zsh
 ```
 
 ### Activate a specific environment
 
 ```bash
-eval "$(pbctl shell-hook --environment cuda)"
+eval "$(jnc shell-hook --environment cuda)"
 ```
 
 ### Get environment variables as JSON
 
 ```bash
-pbctl shell-hook --json
+jnc shell-hook --json
 ```
 
 ### Use in a Dockerfile
 
 ```dockerfile
-RUN pbctl install --frozen
-RUN eval "$(pbctl shell-hook --shell bash)" && python my_script.py
+RUN jnc install --frozen
+RUN eval "$(jnc shell-hook --shell bash)" && python my_script.py
 ```
 
 ### Use in a Makefile
 
 ```makefile
 test:
-	eval "$$(pbctl shell-hook)" && pytest
+	eval "$$(jnc shell-hook)" && pytest
 ```
 
 ### Use in CI (GitHub Actions)
 
 ```yaml
 - run: |
-    eval "$(pbctl shell-hook)"
+    eval "$(jnc shell-hook)"
     python -c "import numpy; print(numpy.__version__)"
 ```

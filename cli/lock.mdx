@@ -1,18 +1,18 @@
 ---
-title: "pbctl lock"
+title: "jnc lock"
 description: "Solve the environment and update the lock file without installing."
 ---
 
-# pbctl lock
+# jnc lock
 
-Solves all environments defined in the workspace manifest and writes an updated `pixi.lock` file. Unlike `pbctl install`, this command does not install any packages into an environment prefix -- it only computes and persists the dependency resolution.
+Solves all environments defined in the workspace manifest and writes an updated `pixi.lock` file. Unlike `jnc install`, this command does not install any packages into an environment prefix -- it only computes and persists the dependency resolution.
 
 This is useful in CI workflows, validation checks, or when you want to preview what would change before installing.
 
 ## Usage
 
 ```bash
-pbctl lock [OPTIONS]
+jnc lock [OPTIONS]
 ```
 
 ## Options
@@ -35,23 +35,23 @@ pbctl lock [OPTIONS]
 ### Update the lock file
 
 ```bash
-pbctl lock
+jnc lock
 ```
 
 ### Check if the lock file is up-to-date (CI use)
 
 ```bash
-pbctl lock --check
+jnc lock --check
 ```
 
 ### Preview lock file changes without writing
 
 ```bash
-pbctl lock --dry-run
+jnc lock --dry-run
 ```
 
 ### Output lock file changes as JSON
 
 ```bash
-pbctl lock --json
+jnc lock --json
 ```

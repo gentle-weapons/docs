@@ -1,6 +1,6 @@
 ---
 title: Quickstart
-description: Set up your first pbctl workspace on a Jetson Orin Nano.
+description: Set up your first jnc workspace on a Jetson Orin Nano.
 ---
 
 # Quickstart
@@ -9,10 +9,10 @@ This guide walks you through creating your first workspace on a Jetson device, a
 
 ## Verify your hardware
 
-First, confirm pbctl can detect your Jetson:
+First, confirm jnc can detect your Jetson:
 
 ```bash
-pbctl probe
+jnc probe
 ```
 
 You should see output like:
@@ -31,7 +31,7 @@ You should see output like:
 ## Create a workspace
 
 ```bash
-pbctl init my-jetson-app
+jnc init my-jetson-app
 cd my-jetson-app
 ```
 
@@ -42,7 +42,7 @@ This creates a `pixi.toml` manifest file that defines your workspace's dependenc
 Install packages from the conda ecosystem:
 
 ```bash
-pbctl add python numpy opencv
+jnc add python numpy opencv
 ```
 
 This resolves compatible versions, updates the manifest, and creates a lock file (`pixi.lock`) for reproducibility.
@@ -63,7 +63,7 @@ l4t = "36"
 Run any command inside the workspace environment:
 
 ```bash
-pbctl run python -c "import cv2; print(f'OpenCV {cv2.__version__}')"
+jnc run python -c "import cv2; print(f'OpenCV {cv2.__version__}')"
 ```
 
 ## Define tasks
@@ -71,13 +71,13 @@ pbctl run python -c "import cv2; print(f'OpenCV {cv2.__version__}')"
 Add reusable tasks to your manifest:
 
 ```bash
-pbctl task add check-gpu "python -c 'import torch; print(torch.cuda.is_available())'"
+jnc task add check-gpu "python -c 'import torch; print(torch.cuda.is_available())'"
 ```
 
 Run them by name:
 
 ```bash
-pbctl run check-gpu
+jnc run check-gpu
 ```
 
 ## Enter the environment shell
@@ -85,7 +85,7 @@ pbctl run check-gpu
 Start an interactive shell with all dependencies available:
 
 ```bash
-pbctl shell
+jnc shell
 python -c "import numpy; print('Ready for development!')"
 exit
 ```

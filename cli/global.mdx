@@ -1,0 +1,194 @@
+---
+title: "pbctl global"
+description: "Install and manage globally available packages in isolated environments."
+---
+
+# pbctl global
+
+Manages global package installations. Each package (or group of packages) is installed into its own isolated environment, and exposed binaries are placed on your `PATH`. This is similar to tools like `pipx` or `apt`, but powered by the conda ecosystem.
+
+## Usage
+
+```bash
+pbctl global <SUBCOMMAND>
+```
+
+## Subcommands
+
+### `install`
+
+Install one or more packages into new global environments.
+
+```bash
+pbctl global install [OPTIONS] <PACKAGES>...
+```
+
+| Option | Short | Description |
+|---|---|---|
+| `--channel` | `-c` | Specify the channel to search for packages |
+| `--platform` | `-p` | Target platform (defaults to current) |
+| `--environment` | `-e` | Install into a named environment instead of using the package name |
+| `--expose` | | Control which binaries are exposed on `PATH` |
+
+### `uninstall`
+
+Remove one or more global environments and their exposed binaries.
+
+```bash
+pbctl global uninstall <ENVIRONMENTS>...
+```
+
+### `add`
+
+Add packages to an existing global environment.
+
+```bash
+pbctl global add [OPTIONS] <PACKAGES>...
+```
+
+| Option | Short | Description |
+|---|---|---|
+| `--channel` | `-c` | Specify the channel to search for packages |
+| `--environment` | `-e` | Target environment name |
+| `--expose` | | Control which binaries are exposed on `PATH` |
+
+### `remove`
+
+Remove packages from a global environment.
+
+```bash
+pbctl global remove <PACKAGES>... --environment <ENV>
+```
+
+### `list`
+
+List all global environments and their exposed binaries.
+
+```bash
+pbctl global list
+```
+
+### `sync`
+
+Synchronize installed global environments with the global manifest file. This installs missing environments and removes ones no longer in the manifest.
+
+```bash
+pbctl global sync
+```
+
+### `edit`
+
+Open the global manifest file in your default editor.
+
+```bash
+pbctl global edit
+```
+
+### `update`
+
+Update one or more global environments to the latest compatible versions.
+
+```bash
+pbctl global update [OPTIONS] [ENVIRONMENTS]...
+```
+
+| Option | Short | Description |
+|---|---|---|
+| `--channel` | `-c` | Specify the channel to search for updates |
+
+If no environments are specified, all global environments are updated.
+
+### `tree`
+
+Display the dependency tree for a global environment.
+
+```bash
+pbctl global tree --environment <ENV>
+```
+
+### `expose add`
+
+Expose additional binaries from a global environment on your `PATH`.
+
+```bash
+pbctl global expose add --environment <ENV> <MAPPING>...
+```
+
+Mappings can be a binary name (e.g., `python3.12`) or a rename mapping (e.g., `py=python3.12`).
+
+### `expose remove`
+
+Remove exposed binaries from a global environment.
+
+```bash
+pbctl global expose remove --environment <ENV> <NAMES>...
+```
+
+### `shortcut add`
+
+Create a shortcut command that runs a specific binary from a global environment.
+
+```bash
+pbctl global shortcut add --environment <ENV> <NAME> <COMMAND>
+```
+
+### `shortcut remove`
+
+Remove a shortcut from a global environment.
+
+```bash
+pbctl global shortcut remove --environment <ENV> <NAME>
+```
+
+## Global Manifest
+
+Global environments are tracked in `~/.pixi/manifests/pixi-global.toml`. You can edit this file directly with `pbctl global edit` or share it across machines and run `pbctl global sync` to replicate your setup.
+
+## Examples
+
+```bash
+# Install common CLI tools
+pbctl global install gh ripgrep bat fd-find
+
+# Install from a specific channel
+pbctl global install --channel bioconda samtools
+
+# Install multiple packages into a shared environment
+pbctl global install --environment data-tools python pandas jupyter
+
+# Add a package to an existing environment
+pbctl global add --environment data-tools matplotlib
+
+# Remove a package from an environment
+pbctl global remove pandas --environment data-tools
+
+# Uninstall a global environment
+pbctl global uninstall ripgrep
+
+# List all global environments
+pbctl global list
+
+# Update all global environments
+pbctl global update
+
+# Update a specific environment
+pbctl global update gh
+
+# View the dependency tree
+pbctl global tree --environment gh
+
+# Expose a specific binary
+pbctl global expose add --environment python python3.12
+
+# Create a shortcut
+pbctl global shortcut add --environment python py "python3.12"
+
+# Remove an exposed binary
+pbctl global expose remove --environment python python3.12
+
+# Edit the global manifest directly
+pbctl global edit
+
+# Sync environments with the manifest
+pbctl global sync
+```

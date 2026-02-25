@@ -1,0 +1,57 @@
+---
+title: "pbctl lock"
+description: "Solve the environment and update the lock file without installing."
+---
+
+# pbctl lock
+
+Solves all environments defined in the workspace manifest and writes an updated `pixi.lock` file. Unlike `pbctl install`, this command does not install any packages into an environment prefix -- it only computes and persists the dependency resolution.
+
+This is useful in CI workflows, validation checks, or when you want to preview what would change before installing.
+
+## Usage
+
+```bash
+pbctl lock [OPTIONS]
+```
+
+## Options
+
+| Option | Description |
+|---|---|
+| `--json` | Output the changes to the lock file in JSON format. |
+| `--check` | Check if the lock file would change. Exits with a non-zero code if changes are detected. Useful in CI. |
+| `--dry-run` | Compute the lock file without writing to disk. Implies `--no-install`. |
+| `--no-install` | Do not install the environment (default behavior for `lock`, but can be made explicit). |
+
+### Global Options
+
+| Option | Description |
+|---|---|
+| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+
+## Examples
+
+### Update the lock file
+
+```bash
+pbctl lock
+```
+
+### Check if the lock file is up-to-date (CI use)
+
+```bash
+pbctl lock --check
+```
+
+### Preview lock file changes without writing
+
+```bash
+pbctl lock --dry-run
+```
+
+### Output lock file changes as JSON
+
+```bash
+pbctl lock --json
+```

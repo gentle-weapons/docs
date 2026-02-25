@@ -1,0 +1,76 @@
+---
+title: Environments
+description: How pbctl manages environments and features within a workspace.
+---
+
+# Environments
+
+A pbctl workspace can contain multiple **environments**, each composed of one or more **features**. This system lets you maintain separate dependency sets for different purposes (development, testing, production) within a single workspace.
+
+## Default environment
+
+Every workspace has a `default` environment that includes the `default` feature. When you run `pbctl add python`, the package is added to the default feature and is available in the default environment.
+
+```toml
+[dependencies]
+python = ">=3.12,<4"
+numpy = ">=2.0,<3"
+```
+
+## Features
+
+A **feature** is a named set of dependencies, tasks, and configuration. Features are the building blocks of environments.
+
+```toml
+[feature.test.dependencies]
+pytest = ">=8.0,<9"
+
+[feature.docs.dependencies]
+sphinx = ">=7.0,<8"
+```
+
+Add packages to a feature:
+
+```bash
+pbctl add --feature test pytest
+pbctl add --feature docs sphinx
+```
+
+## Composing environments
+
+Environments are composed by combining features. Define them in the manifest:
+
+```toml
+[environments]
+test = ["default", "test"]
+docs = ["default", "docs"]
+```
+
+The `test` environment includes everything from both `default` and `test` features.
+
+## Using environments
+
+Target a specific environment with most commands:
+
+```bash
+pbctl run --environment test pytest
+pbctl shell --environment docs
+pbctl list --environment test
+pbctl install --environment test
+```
+
+## Environment installation
+
+When you run `pbctl install`, all environments are solved and installed. Each environment gets its own isolated set of packages. Packages shared across environments are deduplicated on disk using hard links or reflinks.
+
+## Platform support
+
+Each environment inherits the workspace's target platforms. You can also specify platform-specific dependencies within features:
+
+```toml
+[target.linux-aarch64.dependencies]
+cuda-toolkit = ">=12.0,<13"
+
+[feature.gpu.target.linux-aarch64.dependencies]
+pytorch-cuda = ">=2.0,<3"
+```

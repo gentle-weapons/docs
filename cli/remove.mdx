@@ -1,0 +1,85 @@
+---
+title: "pbctl remove"
+description: "Remove dependencies from the workspace."
+---
+
+# pbctl remove
+
+Removes dependencies from the workspace manifest and updates the lock file accordingly. Supports removing both conda and PyPI dependencies.
+
+When the workspace manifest is a `pyproject.toml`, removing a PyPI dependency with `--pypi` will remove it from either the native `project.dependencies` array or, if a feature is specified, from `project.optional-dependencies`.
+
+**Alias:** `rm`
+
+## Usage
+
+```bash
+pbctl remove [OPTIONS] <DEPS>...
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `DEPS` | One or more dependency names to remove. |
+
+## Options
+
+### Dependency Type
+
+| Option | Description |
+|---|---|
+| `--pypi` | Remove a PyPI dependency instead of a conda dependency. |
+
+### Targeting
+
+| Option | Description |
+|---|---|
+| `-p`, `--platform <PLATFORM>` | Remove the dependency only from specific platform(s). Can be specified multiple times. |
+| `-f`, `--feature <FEATURE>` | Remove the dependency from a specific feature (default: the default feature). |
+
+### Update Options
+
+| Option | Description |
+|---|---|
+| `--no-install` | Only modify the lock file, do not install the environment. |
+| `--frozen` | Use the lockfile as-is, do not update it. |
+| `--locked` | Require the lockfile to be up-to-date, abort if not. |
+
+### Global Options
+
+| Option | Description |
+|---|---|
+| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+
+## Examples
+
+### Remove a conda package
+
+```bash
+pbctl remove numpy
+```
+
+### Remove multiple packages
+
+```bash
+pbctl remove numpy pandas scikit-learn
+```
+
+### Remove a PyPI package
+
+```bash
+pbctl remove --pypi requests
+```
+
+### Remove a platform-specific dependency
+
+```bash
+pbctl remove cudatoolkit --platform linux-aarch64
+```
+
+### Remove a dependency from a feature
+
+```bash
+pbctl remove --feature test pytest
+```

@@ -1,0 +1,112 @@
+---
+title: "pbctl config"
+description: "Manage pbctl configuration files at system, global, and local scopes."
+---
+
+# pbctl config
+
+Manages pbctl configuration files. Configuration can be set at three scopes: **system** (machine-wide), **global** (user-wide), and **local** (workspace-specific via `pixi.toml`).
+
+## Usage
+
+```bash
+pbctl config <SUBCOMMAND>
+```
+
+## Subcommands
+
+### `edit`
+
+Open the configuration file in your default editor.
+
+```bash
+pbctl config edit
+pbctl config edit --system
+pbctl config edit --global
+pbctl config edit --local
+```
+
+### `list`
+
+Display current configuration values.
+
+```bash
+pbctl config list [OPTIONS]
+```
+
+| Option | Description |
+|---|---|
+| `--json` | Output in JSON format |
+| `--system` | Show system-level configuration |
+| `--global` | Show global (user-level) configuration |
+| `--local` | Show local (workspace-level) configuration |
+
+### `set`
+
+Set a configuration value.
+
+```bash
+pbctl config set <KEY> <VALUE>
+```
+
+### `unset`
+
+Remove a configuration value.
+
+```bash
+pbctl config unset <KEY>
+```
+
+### `append`
+
+Append a value to a list-type configuration key.
+
+```bash
+pbctl config append <KEY> <VALUE>
+```
+
+### `prepend`
+
+Prepend a value to a list-type configuration key.
+
+```bash
+pbctl config prepend <KEY> <VALUE>
+```
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path` | `-m` | Path to `pixi.toml` or `pyproject.toml` |
+
+## Configuration Scopes
+
+| Scope | Description |
+|---|---|
+| **system** | Machine-wide configuration, applies to all users |
+| **global** | User-wide configuration, applies to all workspaces |
+| **local** | Workspace-specific configuration, stored in `pixi.toml` |
+
+When the same key is set at multiple scopes, the most specific scope wins: local overrides global, which overrides system.
+
+## Examples
+
+```bash
+# Set the default channel globally
+pbctl config set default-channels '["conda-forge"]'
+
+# List all configuration values as JSON
+pbctl config list --json
+
+# Add a channel to the default list
+pbctl config append default-channels bioconda
+
+# Remove a configuration value
+pbctl config unset default-channels
+
+# Edit the global configuration file
+pbctl config edit --global
+
+# View only local (workspace) configuration
+pbctl config list --local
+```

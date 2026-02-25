@@ -1,0 +1,79 @@
+---
+title: Channels
+description: How pbctl resolves packages from conda channels.
+---
+
+# Channels
+
+pbctl uses **conda channels** as package repositories. Channels are the sources from which packages are downloaded and installed.
+
+## Default channel
+
+By default, pbctl uses [conda-forge](https://conda-forge.org/), the largest community-driven conda package repository with over 30,000 packages.
+
+```toml
+[project]
+channels = ["conda-forge"]
+```
+
+## Adding channels
+
+Specify channels in the manifest or via the CLI:
+
+```bash
+pbctl workspace channel add https://prefix.dev/my-channel
+```
+
+```toml
+[project]
+channels = ["conda-forge", "https://prefix.dev/my-channel"]
+```
+
+## Channel priority
+
+When a package exists in multiple channels, pbctl uses a priority system. Channels listed first in the `channels` array take priority. If a package is found in the first channel, it will be used regardless of the version available in other channels.
+
+```toml
+[project]
+# Packages from my-channel take priority over conda-forge
+channels = ["https://prefix.dev/my-channel", "conda-forge"]
+```
+
+## PyPI packages
+
+In addition to conda packages, pbctl supports PyPI packages. Add them with the `--pypi` flag:
+
+```bash
+pbctl add --pypi requests
+```
+
+PyPI dependencies are specified separately in the manifest:
+
+```toml
+[pypi-dependencies]
+requests = ">=2.31,<3"
+```
+
+Conda and PyPI packages coexist in the same environment. Conda packages are resolved first, then PyPI packages are resolved against the installed conda packages.
+
+## Private channels
+
+For private or authenticated channels, configure authentication:
+
+```bash
+pbctl auth login --conda-token <TOKEN> https://prefix.dev/my-private-channel
+```
+
+See [`pbctl auth`](/cli/auth) for more authentication options.
+
+## Feature-specific channels
+
+Features can specify additional channels:
+
+```toml
+[feature.gpu]
+channels = ["nvidia"]
+
+[feature.gpu.dependencies]
+cuda-toolkit = ">=12.0,<13"
+```

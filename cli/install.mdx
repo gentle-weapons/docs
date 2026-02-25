@@ -1,0 +1,76 @@
+---
+title: "pbctl install"
+description: "Install an environment, updating the lock file if needed."
+---
+
+# pbctl install
+
+Installs an environment by resolving dependencies and populating the environment prefix. If the lock file is not up-to-date with the manifest, it will be updated first.
+
+By default, only the `default` environment is installed. Use `--environment` to install a specific environment, or `--all` to install every environment defined in the workspace.
+
+Running `pbctl install` is not strictly required before other commands like `pbctl run` or `pbctl shell` -- those commands automatically install the environment if needed. Use `pbctl install` when you want to explicitly prepare an environment ahead of time.
+
+**Alias:** `i`
+
+## Usage
+
+```bash
+pbctl install [OPTIONS]
+```
+
+## Options
+
+| Option | Description |
+|---|---|
+| `-e`, `--environment <ENV>` | The environment(s) to install. Can be specified multiple times. Defaults to `default`. |
+| `-a`, `--all` | Install all environments. Conflicts with `--environment`. |
+| `--frozen` | Use the lockfile as-is, do not update it even if the manifest has changed. |
+| `--locked` | Require the lockfile to be up-to-date with the manifest, abort if not. |
+| `--skip <PACKAGE>` | Skip installation of specific packages (soft exclusion -- dependencies are still installed). |
+| `--skip-with-deps <PACKAGE>` | Skip a package and its entire dependency subtree (hard exclusion). |
+| `--only <PACKAGE>` | Install only these package(s) and their dependencies. Can be specified multiple times. |
+
+### Global Options
+
+| Option | Description |
+|---|---|
+| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+
+## Examples
+
+### Install the default environment
+
+```bash
+pbctl install
+```
+
+### Install a specific environment
+
+```bash
+pbctl install --environment test
+```
+
+### Install all environments
+
+```bash
+pbctl install --all
+```
+
+### Install using the lock file without updating
+
+```bash
+pbctl install --frozen
+```
+
+### Install while skipping a package
+
+```bash
+pbctl install --skip large-package
+```
+
+### Install only specific packages and their dependencies
+
+```bash
+pbctl install --only python --only numpy
+```

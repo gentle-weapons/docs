@@ -1,0 +1,87 @@
+---
+title: "pbctl shell-hook"
+description: "Print the environment activation script for use in shell configurations."
+---
+
+# pbctl shell-hook
+
+Prints the shell activation script for a workspace environment. You can source this script to activate the environment in your current shell without starting a new shell session.
+
+This is useful for integrating environment activation into CI pipelines, Makefiles, Docker builds, or custom shell scripts.
+
+## Usage
+
+```bash
+pbctl shell-hook [OPTIONS]
+```
+
+## Options
+
+| Option | Description |
+|---|---|
+| `-s`, `--shell <SHELL>` | The target shell for the activation script. Options: `bash`, `zsh`, `fish`, `xonsh`. Defaults to the current shell. |
+| `-e`, `--environment <ENV>` | The environment to generate the activation script for. Defaults to `default`. |
+| `--json` | Emit the environment variables as a JSON object instead of a shell script. Conflicts with `--shell`. |
+
+### Update Options
+
+| Option | Description |
+|---|---|
+| `--frozen` | Use the lockfile as-is, do not update it. |
+| `--locked` | Require the lockfile to be up-to-date, abort if not. |
+| `--no-install` | Do not install the environment before generating the hook. |
+| `--as-is` | Shorthand for `--frozen --no-install`. |
+
+### Global Options
+
+| Option | Description |
+|---|---|
+| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+
+## Examples
+
+### Activate in the current bash session
+
+```bash
+eval "$(pbctl shell-hook)"
+```
+
+### Generate a script for a specific shell
+
+```bash
+pbctl shell-hook --shell zsh
+```
+
+### Activate a specific environment
+
+```bash
+eval "$(pbctl shell-hook --environment cuda)"
+```
+
+### Get environment variables as JSON
+
+```bash
+pbctl shell-hook --json
+```
+
+### Use in a Dockerfile
+
+```dockerfile
+RUN pbctl install --frozen
+RUN eval "$(pbctl shell-hook --shell bash)" && python my_script.py
+```
+
+### Use in a Makefile
+
+```makefile
+test:
+	eval "$$(pbctl shell-hook)" && pytest
+```
+
+### Use in CI (GitHub Actions)
+
+```yaml
+- run: |
+    eval "$(pbctl shell-hook)"
+    python -c "import numpy; print(numpy.__version__)"
+```

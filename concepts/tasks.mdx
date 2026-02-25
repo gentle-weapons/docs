@@ -1,0 +1,101 @@
+---
+title: Tasks
+description: Define and run cross-platform tasks with pbctl's built-in task runner.
+---
+
+# Tasks
+
+pbctl includes a cross-platform task runner. Define tasks in your manifest and run them with `pbctl run`. Tasks execute inside the workspace environment with all dependencies available.
+
+## Defining tasks
+
+### Simple tasks
+
+```toml
+[tasks]
+start = "python main.py"
+lint = "ruff check ."
+format = "ruff format ."
+```
+
+### Tasks with options
+
+Use the table format for more control:
+
+```toml
+[tasks.test]
+cmd = "pytest tests/"
+depends-on = ["build"]
+
+[tasks.build]
+cmd = "python -m build"
+```
+
+## Running tasks
+
+```bash
+pbctl run test
+pbctl run lint
+```
+
+You can also run arbitrary commands (not just defined tasks):
+
+```bash
+pbctl run python -c "print('hello')"
+```
+
+## Task dependencies
+
+Tasks can depend on other tasks. Dependencies run first, in the correct order:
+
+```toml
+[tasks.build]
+cmd = "make build"
+
+[tasks.test]
+cmd = "pytest"
+depends-on = ["build"]
+
+[tasks.ci]
+depends-on = ["lint", "test"]
+```
+
+Running `pbctl run ci` will execute `lint` and `test` (and their dependencies) before `ci`.
+
+## Environment-specific tasks
+
+Tasks belong to features, so you can define tasks for specific environments:
+
+```toml
+[feature.test.tasks]
+test = "pytest tests/ -v"
+
+[feature.docs.tasks]
+docs = "sphinx-build docs/ docs/_build"
+```
+
+Run them by targeting the environment:
+
+```bash
+pbctl run --environment test test
+pbctl run --environment docs docs
+```
+
+## Platform-specific tasks
+
+Define tasks that only apply on certain platforms:
+
+```toml
+[target.linux-aarch64.tasks]
+setup = "bash setup.sh"
+```
+
+## Managing tasks with the CLI
+
+```bash
+pbctl task add start "python main.py"          # Add a task
+pbctl task add test "pytest" --depends-on build # Add with dependency
+pbctl task remove start                         # Remove a task
+pbctl task list                                 # List all tasks
+pbctl task alias ci lint test                   # Create a task alias
+```

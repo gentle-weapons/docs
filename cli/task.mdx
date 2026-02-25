@@ -1,0 +1,120 @@
+---
+title: "pbctl task"
+description: "Add, remove, alias, and list tasks in the workspace manifest."
+---
+
+# pbctl task
+
+Manages tasks defined in the workspace manifest. Tasks are commands that run inside the workspace environment and can depend on other tasks.
+
+## Usage
+
+```bash
+pbctl task <SUBCOMMAND>
+```
+
+## Subcommands
+
+### `add`
+
+Add a new task to the manifest.
+
+```bash
+pbctl task add <NAME> <COMMAND> [OPTIONS]
+```
+
+| Option | Short | Description |
+|---|---|---|
+| `--depends-on` | | Tasks that must run before this task (comma-separated or repeated) |
+| `--platform` | `-p` | Limit the task to specific platforms |
+| `--feature` | `-f` | Add the task to a specific feature |
+| `--cwd` | | Set the working directory for the task |
+| `--env` | | Set environment variables (format: `KEY=VALUE`) |
+| `--description` | | A human-readable description of the task |
+| `--clean-env` | | Run the task with a clean environment (no inherited variables) |
+
+### `remove`
+
+Remove one or more tasks from the manifest.
+
+```bash
+pbctl task remove <NAMES>... [OPTIONS]
+```
+
+| Option | Short | Description |
+|---|---|---|
+| `--platform` | `-p` | Remove a platform-specific task |
+| `--feature` | `-f` | Remove a task from a specific feature |
+
+### `alias`
+
+Create a task alias that depends on other tasks. An alias has no command of its own -- it simply runs its dependencies.
+
+```bash
+pbctl task alias <NAME> <DEPENDS_ON>... [OPTIONS]
+```
+
+| Option | Short | Description |
+|---|---|---|
+| `--platform` | `-p` | Limit the alias to specific platforms |
+| `--feature` | `-f` | Add the alias to a specific feature |
+| `--description` | | A human-readable description of the alias |
+
+### `list`
+
+List all tasks defined in the manifest.
+
+```bash
+pbctl task list [OPTIONS]
+```
+
+| Option | Short | Description |
+|---|---|---|
+| `--environment` | `-e` | Show tasks for a specific environment |
+| `--summary` | `-s` | Show a condensed summary |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path` | `-m` | Path to `pixi.toml` or `pyproject.toml` |
+
+## Examples
+
+```bash
+# Add a simple task
+pbctl task add build "make build"
+
+# Add a task with a dependency
+pbctl task add test "pytest tests/" --depends-on build
+
+# Add a platform-specific task
+pbctl task add setup "bash setup.sh" --platform linux-aarch64
+
+# Add a task to a feature
+pbctl task add lint "ruff check ." --feature dev
+
+# Add a task with environment variables and a working directory
+pbctl task add serve "python -m http.server" --cwd ./dist --env PORT=80
+
+# Add a task with a description
+pbctl task add docs "sphinx-build docs/ docs/_build" --description "Build documentation"
+
+# Create an alias that runs multiple tasks
+pbctl task alias ci lint test build
+
+# Remove a task
+pbctl task remove build
+
+# Remove a platform-specific task
+pbctl task remove setup --platform linux-aarch64
+
+# List all tasks
+pbctl task list
+
+# List tasks for a specific environment
+pbctl task list --environment test
+
+# Show a summary of tasks
+pbctl task list --summary
+```

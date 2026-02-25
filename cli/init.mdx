@@ -1,0 +1,77 @@
+---
+title: "pbctl init"
+description: "Create a new workspace with a manifest file and project scaffolding."
+---
+
+# pbctl init
+
+Creates a new workspace. This command generates a manifest file (`pixi.toml` by default) and supporting files to get you started with dependency management and task running.
+
+The manifest format can be customized with `--format` to generate a `pyproject.toml` instead. You can also bootstrap a workspace from an existing conda `environment.yml` file.
+
+## Usage
+
+```bash
+pbctl init [OPTIONS] [PATH]
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `PATH` | Where to place the workspace. Defaults to the current directory (`.`). |
+
+## Options
+
+| Option | Description |
+|---|---|
+| `-c`, `--channel <CHANNEL>` | Channel to use in the workspace. Can be specified multiple times. Conflicts with `--import`. |
+| `-p`, `--platform <PLATFORM>` | Platforms that the workspace supports. Can be specified multiple times. |
+| `-i`, `--import <ENVIRONMENT_FILE>` | Path to a conda `environment.yml` file to bootstrap the workspace from. |
+| `--format <FORMAT>` | The manifest format to create. Values: `pixi`, `pyproject`. Conflicts with `--import`. |
+| `-s`, `--scm <SCM>` | Source control management provider. Generates appropriate `.gitignore` and `.gitattributes` files. Values: `github`, `gitlab`, `codeberg`. |
+| `--conda-pypi-map <MAPPING>` | Mapping between conda channels and PyPI indexes, as comma-separated `CHANNEL=URL` pairs. |
+
+## Examples
+
+### Create a workspace in the current directory
+
+```bash
+pbctl init
+```
+
+### Create a workspace in a new directory
+
+```bash
+pbctl init my-project
+```
+
+### Create a workspace with specific channels
+
+```bash
+pbctl init --channel conda-forge --channel bioconda
+```
+
+### Create a workspace for specific platforms
+
+```bash
+pbctl init --platform linux-aarch64
+```
+
+### Create a pyproject.toml-based workspace
+
+```bash
+pbctl init --format pyproject
+```
+
+### Bootstrap from an existing environment.yml
+
+```bash
+pbctl init --import environment.yml
+```
+
+### Create a workspace with GitHub SCM files
+
+```bash
+pbctl init --scm github my-project
+```

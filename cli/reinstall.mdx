@@ -1,0 +1,71 @@
+---
+title: "pbctl reinstall"
+description: "Re-install an environment with optional package filtering."
+---
+
+# pbctl reinstall
+
+Re-installs an environment, forcing a fresh installation of packages. If specific packages are named, only those packages are reinstalled. Otherwise, the entire environment is reinstalled from scratch.
+
+If the lock file is not up-to-date with the manifest, it will be updated first.
+
+By default, only the `default` environment is reinstalled. Use `--environment` to target a specific environment, or `--all` to reinstall every environment in the workspace.
+
+## Usage
+
+```bash
+pbctl reinstall [OPTIONS] [PACKAGE]...
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `PACKAGE` | One or more package names to reinstall. If omitted, the entire environment is reinstalled. |
+
+## Options
+
+| Option | Description |
+|---|---|
+| `-e`, `--environment <ENV>` | The environment(s) to reinstall. Can be specified multiple times. Defaults to `default`. |
+| `-a`, `--all` | Reinstall all environments. Conflicts with `--environment`. |
+| `--frozen` | Use the lockfile as-is, do not update it even if the manifest has changed. |
+| `--locked` | Require the lockfile to be up-to-date with the manifest, abort if not. |
+
+### Global Options
+
+| Option | Description |
+|---|---|
+| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+
+## Examples
+
+### Reinstall the entire default environment
+
+```bash
+pbctl reinstall
+```
+
+### Reinstall specific packages
+
+```bash
+pbctl reinstall numpy scipy
+```
+
+### Reinstall a specific environment
+
+```bash
+pbctl reinstall --environment test
+```
+
+### Reinstall all environments
+
+```bash
+pbctl reinstall --all
+```
+
+### Reinstall without updating the lock file
+
+```bash
+pbctl reinstall --frozen
+```

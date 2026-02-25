@@ -1,0 +1,76 @@
+---
+title: "pbctl update"
+description: "Update dependencies in the lock file."
+---
+
+# pbctl update
+
+Checks if there are newer versions of dependencies and updates the `pixi.lock` file and environments accordingly. Only updates packages to versions still compatible with the version constraints defined in the manifest.
+
+If no packages are specified, all packages are updated. You can scope updates to specific environments and platforms.
+
+## Usage
+
+```bash
+pbctl update [OPTIONS] [PACKAGES]...
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `[PACKAGES]...` | The packages to update, space-separated. If none are provided, all packages are updated. |
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--environment <ENV>` | `-e` | The environments to update. Can be specified multiple times. If none are given, all environments are updated. |
+| `--platform <PLATFORM>` | `-p` | The platforms to update. Can be specified multiple times. If none are given, all platforms are updated. |
+| `--dry-run` | `-n` | Show what would be updated without writing changes to the lock file or environment. |
+| `--json` | | Output the changes in JSON format. |
+| `--no-install` | | Update the lock file without installing the environment. |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+
+## Examples
+
+Update all packages:
+
+```bash
+pbctl update
+```
+
+Update specific packages:
+
+```bash
+pbctl update python numpy
+```
+
+Update only in a specific environment:
+
+```bash
+pbctl update --environment test
+```
+
+Preview changes without applying them:
+
+```bash
+pbctl update --dry-run
+```
+
+Update for a specific platform:
+
+```bash
+pbctl update --platform linux-aarch64
+```
+
+Output changes as JSON:
+
+```bash
+pbctl update --json
+```

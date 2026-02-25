@@ -1,0 +1,100 @@
+---
+title: Basic Usage
+description: Common pbctl workflows for managing workspaces, dependencies, and tasks.
+---
+
+# Basic Usage
+
+pbctl covers the full lifecycle of workspace management. Here's an overview of the most common workflows.
+
+## Managing workspaces
+
+| Command | Description |
+|---|---|
+| [`pbctl init`](/cli/init) | Create a new workspace |
+| [`pbctl add`](/cli/add) | Add a dependency |
+| [`pbctl remove`](/cli/remove) | Remove a dependency |
+| [`pbctl update`](/cli/update) | Update dependencies in the lock file |
+| [`pbctl upgrade`](/cli/upgrade) | Upgrade dependencies with loosened version constraints |
+| [`pbctl lock`](/cli/lock) | Solve and update the lock file without installing |
+| [`pbctl install`](/cli/install) | Install the environment from the lock file |
+| [`pbctl info`](/cli/info) | Show workspace and system information |
+| [`pbctl run`](/cli/run) | Run a task or command in the environment |
+| [`pbctl shell`](/cli/shell) | Start an interactive shell in the environment |
+| [`pbctl list`](/cli/list) | List packages in the environment |
+| [`pbctl tree`](/cli/tree) | Show a dependency tree |
+| [`pbctl clean`](/cli/clean) | Remove the environment |
+
+## Managing global installations
+
+pbctl can install tools globally in isolated environments, accessible from anywhere:
+
+| Command | Description |
+|---|---|
+| [`pbctl global install`](/cli/global) | Install a package into its own global environment |
+| [`pbctl global uninstall`](/cli/global) | Remove a global environment |
+| [`pbctl global add`](/cli/global) | Add a package to an existing global environment |
+| [`pbctl global list`](/cli/global) | List global environments |
+| [`pbctl global sync`](/cli/global) | Sync global environments with the global manifest |
+| [`pbctl global update`](/cli/global) | Update global environments |
+
+More information: [Global Tools](/concepts/global-tools)
+
+## Running one-off commands
+
+Run a command in a temporary environment without creating a workspace:
+
+```bash
+pbctl exec python -- -c "print('hello')"
+pbctl exec --spec "python=3.12" python -- -VV
+```
+
+## Tasks
+
+Define cross-platform tasks in your manifest:
+
+```toml
+[tasks]
+build = "make build"
+
+[tasks.test]
+cmd = "pytest"
+depends-on = ["build"]
+```
+
+Run them with `pbctl run build` or `pbctl run test`. Tasks can depend on other tasks and run in the correct order.
+
+More information: [Tasks](/concepts/tasks)
+
+## Multiple environments
+
+Workspaces support multiple environments built from features:
+
+```bash
+pbctl add --feature test pytest     # Add to "test" feature
+pbctl run --environment test pytest # Run in "test" environment
+```
+
+More information: [Environments](/concepts/environments)
+
+## Platform support
+
+pbctl targets `linux-aarch64` for NVIDIA Jetson (JetPack 6) devices:
+
+```bash
+pbctl add python --platform linux-aarch64
+```
+
+## Utilities
+
+| Command | Description |
+|---|---|
+| [`pbctl info`](/cli/info) | Show workspace and system information |
+| [`pbctl config`](/cli/config) | View or edit configuration |
+| [`pbctl tree`](/cli/tree) | Show dependency tree |
+| [`pbctl list`](/cli/list) | List installed packages |
+| [`pbctl clean`](/cli/clean) | Remove workspace environments |
+| [`pbctl auth`](/cli/auth) | Manage conda channel authentication |
+| [`pbctl search`](/cli/search) | Search for packages |
+| [`pbctl completion`](/cli/completion) | Generate shell completion scripts |
+| [`pbctl probe`](/cli/probe) | Detect NVIDIA Jetson hardware |

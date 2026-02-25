@@ -1,0 +1,71 @@
+---
+title: "pbctl completion"
+description: "Generate shell completion scripts for pbctl."
+---
+
+# pbctl completion
+
+Generates shell completion scripts for pbctl. Completions provide tab-completion for commands, subcommands, options, and arguments in your shell.
+
+## Usage
+
+```bash
+pbctl completion --shell <SHELL>
+```
+
+## Options
+
+| Option | Description |
+|---|---|
+| `--shell` | The shell to generate completions for (required) |
+
+### Supported Shells
+
+| Shell | Value |
+|---|---|
+| Bash | `bash` |
+| Fish | `fish` |
+| Zsh | `zsh` |
+| Elvish | `elvish` |
+
+## Examples
+
+### Bash
+
+Add to your `~/.bashrc`:
+
+```bash
+eval "$(pbctl completion --shell bash)"
+```
+
+### Fish
+
+Save to the Fish completions directory:
+
+```bash
+pbctl completion --shell fish > ~/.config/fish/completions/pbctl.fish
+```
+
+### Zsh
+
+Add to your `~/.zshrc`:
+
+```bash
+eval "$(pbctl completion --shell zsh)"
+```
+
+Or save to a file in your `fpath`:
+
+```bash
+pbctl completion --shell zsh > ~/.zfunc/_pbctl
+```
+
+Make sure `~/.zfunc` is in your `fpath` (add `fpath=(~/.zfunc $fpath)` to `~/.zshrc` before `compinit`).
+
+### Elvish
+
+Add to your `~/.elvish/rc.elv`:
+
+```bash
+eval (pbctl completion --shell elvish | slurp)
+```

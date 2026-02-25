@@ -1,0 +1,78 @@
+---
+title: Introduction
+description: pbctl is a fast, reproducible package manager for NVIDIA Jetson, built on the conda ecosystem.
+---
+
+# pbctl
+
+pbctl is a **fast, reproducible package manager for NVIDIA Jetson**, built on the conda ecosystem. It provides workspace management, dependency resolution, task running, and environment isolation — purpose-built for edge AI and embedded Linux development on Jetson hardware.
+
+<Note>
+pbctl currently supports **Jetson Orin Nano** with **JetPack 6**. Support for additional Jetson modules and JetPack versions is coming soon.
+</Note>
+
+## Highlights
+
+<CardGroup cols={2}>
+
+<Card title="Jetson-Aware" icon="microchip">
+  Detects your Jetson hardware, L4T version, and CUDA capabilities automatically. Resolves packages compatible with your device.
+</Card>
+
+<Card title="Reproducibility" icon="arrows-rotate">
+  Isolated environments with lockfiles built-in. Share identical setups across your Jetson fleet.
+</Card>
+
+<Card title="Tasks" icon="list-check">
+  Built-in cross-platform task runner with dependency support. Automate build, test, and deploy pipelines.
+</Card>
+
+<Card title="Conda Ecosystem" icon="cube">
+  Access over 30,000 packages from conda-forge and other conda channels, including CUDA-accelerated libraries.
+</Card>
+
+<Card title="Multiple Environments" icon="layer-group">
+  Compose multiple environments in one manifest — separate inference, training, and development dependencies.
+</Card>
+
+<Card title="Global Tools" icon="toolbox">
+  Install global CLI tools in isolated environments. A modern replacement for `apt` on your Jetson.
+</Card>
+
+</CardGroup>
+
+## Quick Demo
+
+Detect your Jetson hardware:
+
+```bash
+pbctl probe
+```
+
+Set up a workspace for ML development:
+
+```bash
+pbctl init my-jetson-app
+cd my-jetson-app
+pbctl add python pytorch cuda-toolkit opencv
+pbctl run python -c "import torch; print(f'CUDA available: {torch.cuda.is_available()}')"
+```
+
+Install tools globally:
+
+```bash
+pbctl global install gh ripgrep btop
+```
+
+## Available Software
+
+pbctl defaults to [conda-forge](https://conda-forge.org/), the largest community-driven conda package repository with over **30,000 packages**. Key packages for Jetson development:
+
+- **ML/AI**: `pytorch`, `tensorflow`, `onnxruntime`, `scikit-learn`, `numpy`, `pandas`
+- **Computer Vision**: `opencv`, `pillow`, `torchvision`
+- **CUDA**: `cuda-toolkit`, `cudnn`, `cutensor`
+- **Python**: `python`, `jupyterlab`, `ipython`
+- **C/C++**: `cmake`, `ninja`, `gcc`, `boost`
+- **CLI Tools**: `git`, `gh`, `ripgrep`, `make`, `curl`
+
+Browse thousands more on [conda-forge.org](https://conda-forge.org/).

@@ -1,0 +1,78 @@
+---
+title: "pbctl upgrade"
+description: "Upgrade dependencies with loosened version constraints."
+---
+
+# pbctl upgrade
+
+Checks if there are newer versions of dependencies and upgrades them by loosening the version constraints in the manifest file. Unlike `pbctl update`, which respects existing version constraints, `upgrade` temporarily removes version pins to find the latest available versions, then updates both the lock file and the manifest.
+
+By default, all features and their dependencies are upgraded.
+
+## Usage
+
+```bash
+pbctl upgrade [OPTIONS] [PACKAGES]...
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `[PACKAGES]...` | The packages to upgrade. If none are provided, all packages across all features are upgraded. |
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--feature <FEATURE>` | `-f` | Only upgrade packages in the specified feature. If not given, all features are upgraded. |
+| `--exclude <PACKAGES>` | | Exclude specific packages from the upgrade. Cannot be used with positional package arguments. |
+| `--dry-run` | `-n` | Show what would be changed without modifying the manifest, lock file, or environment. |
+| `--json` | | Output the changes in JSON format. |
+| `--no-install` | | Update the lock file and manifest without installing the environment. |
+| `--frozen` | | Use the lock file as-is. Do not update it if it is out of date. |
+| `--locked` | | Require the lock file to be up-to-date. Abort if it is not. |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+
+## Examples
+
+Upgrade all dependencies:
+
+```bash
+pbctl upgrade
+```
+
+Upgrade specific packages:
+
+```bash
+pbctl upgrade python numpy
+```
+
+Upgrade only in a specific feature:
+
+```bash
+pbctl upgrade --feature cuda
+```
+
+Upgrade everything except certain packages:
+
+```bash
+pbctl upgrade --exclude python
+```
+
+Preview changes without applying:
+
+```bash
+pbctl upgrade --dry-run
+```
+
+Output changes as JSON:
+
+```bash
+pbctl upgrade --json
+```

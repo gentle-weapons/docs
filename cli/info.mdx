@@ -1,0 +1,72 @@
+---
+title: "pbctl info"
+description: "Show information about the system, workspace, and environments."
+---
+
+# pbctl info
+
+Displays information about the current system, workspace, and environments. This includes the platform, virtual packages, cache location, authentication storage path, global tool directories, workspace details, and environment configurations.
+
+When run outside a workspace, only system and global information is shown.
+
+## Usage
+
+```bash
+pbctl info [OPTIONS]
+```
+
+## Options
+
+| Option | Description |
+|---|---|
+| `--extended` | Show additional details including cache and environment sizes. |
+| `--json` | Output all information in JSON format. |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+
+## Output
+
+The command displays sections depending on context:
+
+**System** -- always shown:
+- Version, TLS backend, platform
+- Virtual packages (e.g., `__glibc`, `__cuda`)
+- Cache directory and authentication storage path
+- Config file locations
+
+**Global** -- always shown:
+- Binary directory, environment directory, manifest path
+
+**Workspace** -- shown when inside a workspace:
+- Workspace name, version, manifest file path
+- Last lock file update time
+
+**Environments** -- shown when inside a workspace:
+- Environment name, features, solve group
+- Dependency count and list
+- Target platforms, prefix location
+- System requirements and tasks
+
+## Examples
+
+Show basic info:
+
+```bash
+pbctl info
+```
+
+Show extended info with sizes:
+
+```bash
+pbctl info --extended
+```
+
+Output as JSON for scripting:
+
+```bash
+pbctl info --json
+```

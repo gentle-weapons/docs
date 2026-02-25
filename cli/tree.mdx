@@ -1,0 +1,71 @@
+---
+title: "pbctl tree"
+description: "Show a tree of workspace dependencies."
+---
+
+# pbctl tree
+
+Displays a tree view of workspace dependencies. Direct dependencies specified in the manifest are highlighted in green. Conda package versions are shown in yellow and PyPI versions in blue.
+
+## Usage
+
+```bash
+pbctl tree [OPTIONS] [REGEX]
+```
+
+**Alias:** `t`
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `[REGEX]` | Optional regular expression to filter which packages are shown. |
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--environment <ENV>` | `-e` | The environment to show the tree for. Defaults to the default environment. |
+| `--platform <PLATFORM>` | `-p` | The platform to show the tree for. Defaults to the current platform. |
+| `--invert` | `-i` | Invert the tree to show what depends on the given package (requires a regex argument). |
+| `--frozen` | | Use the lock file as-is. Do not update it if it is out of date. |
+| `--locked` | | Require the lock file to be up-to-date. Abort if it is not. |
+| `--no-install` | | Do not install the environment, only check the lock file. |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+
+## Examples
+
+Show the full dependency tree:
+
+```bash
+pbctl tree
+```
+
+Filter to a specific package and its dependencies:
+
+```bash
+pbctl tree numpy
+```
+
+Show what depends on a specific package (inverted tree):
+
+```bash
+pbctl tree --invert openssl
+```
+
+Show the tree for a specific environment:
+
+```bash
+pbctl tree --environment test
+```
+
+Show the tree for a different platform:
+
+```bash
+pbctl tree --platform linux-aarch64
+```

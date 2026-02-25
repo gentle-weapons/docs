@@ -1,0 +1,84 @@
+---
+title: "pbctl upload"
+description: "Upload conda packages to a channel or package repository."
+---
+
+# pbctl upload
+
+Uploads built conda packages to various channel backends. Use this after `pbctl build` to publish packages.
+
+## Usage
+
+```bash
+pbctl upload <SUBCOMMAND> <PACKAGE_FILE>
+```
+
+## Subcommands
+
+### `prefix`
+
+Upload a package to a [prefix.dev](https://prefix.dev) channel.
+
+```bash
+pbctl upload prefix <PACKAGE_FILE> --channel <CHANNEL>
+```
+
+### `anaconda`
+
+Upload a package to [Anaconda.org](https://anaconda.org).
+
+```bash
+pbctl upload anaconda <PACKAGE_FILE> --owner <OWNER>
+```
+
+### `quetz`
+
+Upload a package to a [Quetz](https://github.com/mamba-org/quetz) server.
+
+```bash
+pbctl upload quetz <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
+```
+
+### `artifactory`
+
+Upload a package to a JFrog Artifactory conda repository.
+
+```bash
+pbctl upload artifactory <PACKAGE_FILE> --url <URL> --channel <CHANNEL>
+```
+
+### `s3`
+
+Upload a package to an S3-compatible bucket.
+
+```bash
+pbctl upload s3 <PACKAGE_FILE> --bucket <BUCKET> --region <REGION>
+```
+
+### `conda-forge`
+
+Upload a package to conda-forge via the conda-forge staging process.
+
+```bash
+pbctl upload conda-forge <PACKAGE_FILE>
+```
+
+## Examples
+
+```bash
+# Build and upload to prefix.dev
+pbctl build --output-dir ./dist
+pbctl upload prefix ./dist/my-package-1.0.0.conda --channel my-channel
+
+# Upload to Anaconda.org
+pbctl upload anaconda ./dist/my-package-1.0.0.conda --owner my-org
+
+# Upload to a self-hosted Quetz server
+pbctl upload quetz ./dist/my-package-1.0.0.conda --url https://quetz.example.com --channel main
+
+# Upload to Artifactory
+pbctl upload artifactory ./dist/my-package-1.0.0.conda --url https://artifactory.example.com --channel conda-local
+
+# Upload to S3
+pbctl upload s3 ./dist/my-package-1.0.0.conda --bucket my-conda-packages --region us-east-1
+```

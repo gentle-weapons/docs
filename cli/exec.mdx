@@ -1,0 +1,74 @@
+---
+title: "pbctl exec"
+description: "Run a command in a temporary environment."
+---
+
+# pbctl exec
+
+Runs a command in a temporary, isolated environment. The required packages are automatically installed into a cached environment and the command is executed within it. This is useful for one-off commands without creating a full workspace.
+
+Temporary environments are cached for reuse. Clear them with `pbctl clean cache --exec`.
+
+## Usage
+
+```bash
+pbctl exec [OPTIONS] <COMMAND> [ARGS]...
+```
+
+**Alias:** `x`
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `<COMMAND> [ARGS]...` | The executable to run, followed by any arguments. If `--spec` is not provided, the package is guessed from the command name. |
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--spec <SPEC>` | `-s` | Matchspecs of packages to install. Can be specified multiple times. When provided, disables automatic package guessing. |
+| `--with <SPEC>` | `-w` | Additional matchspecs to install alongside the guessed package. Cannot be combined with `--spec`. |
+| `--channel <CHANNEL>` | `-c` | The channel to search for packages. Can be specified multiple times. Defaults to `conda-forge`. |
+| `--platform <PLATFORM>` | `-p` | The platform to create the environment for. Defaults to the current platform. |
+| `--force-reinstall` | | Always create a new environment, even if a cached one exists. |
+| `--list[=REGEX]` | | List packages in the environment before executing the command. Optionally filter by regex. |
+| `--no-modify-ps1` | | Disable modification of the PS1 prompt to indicate the temporary environment. |
+
+## Examples
+
+Run Python in a temporary environment:
+
+```bash
+pbctl exec python
+```
+
+Run Python with a specific version:
+
+```bash
+pbctl exec --spec "python=3.12" python -- -c "print('hello')"
+```
+
+Run a command with additional packages:
+
+```bash
+pbctl exec --with numpy python -- -c "import numpy; print(numpy.__version__)"
+```
+
+Use a specific channel:
+
+```bash
+pbctl exec --channel conda-forge --spec "nodejs=20" node -- --version
+```
+
+Force a fresh environment:
+
+```bash
+pbctl exec --force-reinstall python
+```
+
+List packages in the temporary environment before running:
+
+```bash
+pbctl exec --list python
+```

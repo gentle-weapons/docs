@@ -1,0 +1,118 @@
+---
+title: Installation
+description: How to install pbctl on your NVIDIA Jetson device.
+---
+
+# Installation
+
+## Prerequisites
+
+- **NVIDIA Jetson Orin Nano** (support for additional modules coming soon)
+- **JetPack 6** (L4T R36.x)
+- Internet connection for downloading packages
+
+## Install
+
+```bash
+curl -fsSL https://pixi.sh/install.sh | sh
+```
+
+If your system doesn't have `curl`, use `wget`:
+
+```bash
+wget -qO- https://pixi.sh/install.sh | sh
+```
+
+This downloads the latest pbctl binary, places it in `~/.pixi/bin`, and adds it to your `PATH`.
+
+<Warning>
+Restart your terminal after installation for the `PATH` changes to take effect.
+</Warning>
+
+## Verify Installation
+
+After restarting your terminal, verify pbctl is installed and detect your Jetson hardware:
+
+```bash
+pbctl --version
+pbctl probe
+```
+
+The `probe` command should report your Orin Nano hardware, L4T version, JetPack version, and CUDA capabilities.
+
+## Alternative Installation Methods
+
+### Download From GitHub Releases
+
+pbctl is a single executable with no external dependencies. Download the `aarch64` archive from the [GitHub releases](https://github.com/prefix-dev/pixi/releases), unpack it, and add it to your `PATH`.
+
+### Install From Source
+
+pbctl is written in Rust and can be built with cargo:
+
+```bash
+cargo install --locked --git https://github.com/prefix-dev/pixi.git pixi
+```
+
+## Installer Script Options
+
+| Variable | Description | Default |
+|---|---|---|
+| `PIXI_VERSION` | Version to install | `latest` |
+| `PIXI_HOME` | Home folder for global environments and configs | `$HOME/.pixi` |
+| `PIXI_BIN_DIR` | Directory for the binary | `$PIXI_HOME/bin` |
+| `PIXI_NO_PATH_UPDATE` | If set, skip `PATH` modification | |
+| `PIXI_DOWNLOAD_URL` | Override the download URL | GitHub releases |
+
+Example — install a specific version:
+```bash
+curl -fsSL https://pixi.sh/install.sh | PIXI_VERSION=v0.18.0 bash
+```
+
+## Autocompletion
+
+After installing, enable shell autocompletion:
+
+<Tabs>
+<Tab title="Bash">
+
+Add to `~/.bashrc`:
+```bash
+eval "$(pbctl completion --shell bash)"
+```
+
+</Tab>
+<Tab title="Zsh">
+
+Add to `~/.zshrc`:
+```zsh
+autoload -Uz compinit && compinit
+eval "$(pbctl completion --shell zsh)"
+```
+
+</Tab>
+<Tab title="Fish">
+
+Add to `~/.config/fish/config.fish`:
+```fish
+pbctl completion --shell fish | source
+```
+
+</Tab>
+</Tabs>
+
+## Uninstall
+
+1. Remove cached data:
+   ```bash
+   pbctl clean cache
+   ```
+2. Remove environments from your workspaces:
+   ```bash
+   cd path/to/workspace && pbctl clean
+   ```
+3. Remove pbctl and its global environments:
+   ```bash
+   rm -r ~/.pixi
+   ```
+4. Remove `~/.pixi/bin` from your `PATH` in your shell config file (e.g., `~/.bashrc`).

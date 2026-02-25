@@ -1,0 +1,34 @@
+---
+title: "pbctl build"
+description: "Build a conda package from the workspace."
+---
+
+# pbctl build
+
+Builds a conda package from the workspace. This uses the build configuration defined in `pixi.toml` to produce a `.conda` package file that can be uploaded to a channel or installed elsewhere.
+
+## Usage
+
+```bash
+pbctl build [OPTIONS]
+```
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--output-dir` | | Directory to place the built package (defaults to current directory) |
+| `--manifest-path` | `-m` | Path to `pixi.toml` or `pyproject.toml` |
+
+## Examples
+
+```bash
+# Build a package in the current directory
+pbctl build
+
+# Build and place the output in a specific directory
+pbctl build --output-dir ./dist
+
+# Build using a specific manifest
+pbctl build --manifest-path /path/to/pixi.toml
+```

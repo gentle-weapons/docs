@@ -1,0 +1,86 @@
+---
+title: "pbctl list"
+description: "List packages in the environment."
+---
+
+# pbctl list
+
+Lists all packages installed in the environment. Packages that are explicitly defined in the workspace manifest are highlighted. Supports filtering by regex, sorting, JSON output, and field selection.
+
+## Usage
+
+```bash
+pbctl list [OPTIONS] [REGEX]
+```
+
+**Alias:** `ls`
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `[REGEX]` | Optional regular expression to filter packages by name. |
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--environment <ENV>` | `-e` | The environment to list packages for. Defaults to the default environment. |
+| `--platform <PLATFORM>` | | The platform to list packages for. Defaults to the current platform. |
+| `--json` | | Output the package list in JSON format. |
+| `--sort-by <STRATEGY>` | | Sort packages by `name` (default), `size`, or `kind`. |
+| `--fields <FIELDS>` | | Comma-separated list of fields to display: `name`, `version`, `build`, `build-number`, `size`, `kind`, `source`, `license`, `license-family`, `md5`, `sha256`, `arch`, `platform`, `subdir`, `timestamp`, `noarch`, `file-name`, `url`, `requested-spec`, `constrains`, `depends`, `track-features`, `is-editable`. Defaults to `name,version,build,size,kind,source`. |
+| `--explicit` | `-x` | Only list packages explicitly defined in the workspace manifest. |
+| `--frozen` | | Use the lock file as-is. Do not update it if it is out of date. |
+| `--locked` | | Require the lock file to be up-to-date. Abort if it is not. |
+| `--no-install` | | Do not install the environment, only check the lock file. |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+
+## Examples
+
+List all packages in the default environment:
+
+```bash
+pbctl list
+```
+
+Filter packages by name:
+
+```bash
+pbctl list "numpy.*"
+```
+
+List packages in a specific environment:
+
+```bash
+pbctl list --environment test
+```
+
+Output as JSON:
+
+```bash
+pbctl list --json
+```
+
+Sort by size:
+
+```bash
+pbctl list --sort-by size
+```
+
+Show only explicitly requested packages:
+
+```bash
+pbctl list --explicit
+```
+
+Choose which fields to display:
+
+```bash
+pbctl list --fields name,version,license,size
+```

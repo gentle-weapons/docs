@@ -1,0 +1,67 @@
+---
+title: "pbctl shell"
+description: "Start an interactive shell in the workspace environment."
+---
+
+# pbctl shell
+
+Starts an interactive shell session with the workspace environment activated. All packages installed in the environment are available on the `PATH`, and environment variables are set as if the environment were natively active.
+
+The shell type is detected automatically from your current process (bash, zsh, fish). Run `exit` to leave the shell and return to your original environment.
+
+The environment is automatically installed and updated before the shell starts, unless `--frozen` or `--as-is` is used.
+
+**Alias:** `s`
+
+## Usage
+
+```bash
+pbctl shell [OPTIONS]
+```
+
+## Options
+
+| Option | Description |
+|---|---|
+| `-e`, `--environment <ENV>` | The environment to activate in the shell. Defaults to `default`. |
+
+### Update Options
+
+| Option | Description |
+|---|---|
+| `--frozen` | Use the lockfile as-is, do not update it. |
+| `--locked` | Require the lockfile to be up-to-date, abort if not. |
+| `--no-install` | Do not install the environment before starting the shell. |
+| `--as-is` | Shorthand for `--frozen --no-install`. |
+
+### Global Options
+
+| Option | Description |
+|---|---|
+| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+
+## Examples
+
+### Start a shell in the default environment
+
+```bash
+pbctl shell
+```
+
+### Start a shell in a specific environment
+
+```bash
+pbctl shell --environment cuda
+```
+
+### Start a shell without updating the lock file
+
+```bash
+pbctl shell --frozen
+```
+
+### Start a shell without any updates or installs
+
+```bash
+pbctl shell --as-is
+```

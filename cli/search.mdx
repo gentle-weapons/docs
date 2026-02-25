@@ -1,0 +1,66 @@
+---
+title: "pbctl search"
+description: "Search for packages in conda channels."
+---
+
+# pbctl search
+
+Searches for conda packages in configured channels. When given an exact package name, it displays detailed information about the latest version including dependencies, license, and available builds. Supports wildcard patterns to search across package names.
+
+## Usage
+
+```bash
+pbctl search [OPTIONS] <PACKAGE>
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `<PACKAGE>` | Name of the package to search for. Supports wildcard patterns (e.g., `py*`). |
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--channel <CHANNEL>` | `-c` | The channel to search in. Can be specified multiple times. Uses workspace channels if inside a workspace, otherwise defaults to `conda-forge`. |
+| `--platform <PLATFORM>` | `-p` | The platform to search for. Defaults to the current platform. |
+| `--limit <N>` | `-l` | Limit the number of search results (applies to wildcard searches). |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. Used to read workspace channel configuration. |
+
+## Examples
+
+Search for a specific package:
+
+```bash
+pbctl search python
+```
+
+Search with a wildcard pattern:
+
+```bash
+pbctl search "py*"
+```
+
+Limit search results:
+
+```bash
+pbctl search --limit 10 "numpy*"
+```
+
+Search in a specific channel:
+
+```bash
+pbctl search --channel bioconda samtools
+```
+
+Search for a different platform:
+
+```bash
+pbctl search --platform linux-aarch64 cuda-toolkit
+```

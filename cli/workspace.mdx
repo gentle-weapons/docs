@@ -1,0 +1,176 @@
+---
+title: "pbctl workspace"
+description: "Modify workspace configuration including channels, platforms, environments, and more."
+---
+
+# pbctl workspace
+
+Modifies workspace configuration stored in `pixi.toml`. This command provides subcommands for managing channels, platforms, environments, features, versioning, and other workspace settings.
+
+**Alias:** `pbctl project`
+
+## Usage
+
+```bash
+pbctl workspace <SUBCOMMAND>
+```
+
+## Subcommands
+
+### `channel`
+
+Manage conda channels for the workspace.
+
+```bash
+pbctl workspace channel add <CHANNEL>...
+pbctl workspace channel list
+pbctl workspace channel remove <CHANNEL>...
+```
+
+### `description`
+
+Get or set the workspace description.
+
+```bash
+pbctl workspace description get
+pbctl workspace description set <DESCRIPTION>
+```
+
+### `platform`
+
+Manage target platforms for the workspace.
+
+```bash
+pbctl workspace platform add <PLATFORM>...
+pbctl workspace platform list
+pbctl workspace platform remove <PLATFORM>...
+```
+
+Platform: `linux-aarch64` (Jetson). Additional platforms will be supported in the future.
+
+### `version`
+
+Manage the workspace version.
+
+```bash
+pbctl workspace version get
+pbctl workspace version set <VERSION>
+pbctl workspace version major    # Bump major version
+pbctl workspace version minor    # Bump minor version
+pbctl workspace version patch    # Bump patch version
+```
+
+### `environment`
+
+Manage environments in the workspace.
+
+```bash
+pbctl workspace environment add <NAME> [OPTIONS]
+pbctl workspace environment list
+pbctl workspace environment remove <NAME>
+```
+
+### `feature`
+
+Manage features in the workspace.
+
+```bash
+pbctl workspace feature list
+pbctl workspace feature remove <NAME>
+```
+
+### `export`
+
+Export the workspace environment to other formats.
+
+```bash
+pbctl workspace export conda-environment [OPTIONS]
+pbctl workspace export conda-explicit-spec [OPTIONS]
+```
+
+These commands produce output compatible with conda's environment and explicit specification formats, making it easy to share environments with users of other conda tools.
+
+### `name`
+
+Get or set the workspace name.
+
+```bash
+pbctl workspace name get
+pbctl workspace name set <NAME>
+```
+
+### `system-requirements`
+
+Manage system requirements for the workspace.
+
+```bash
+pbctl workspace system-requirements add <REQUIREMENT>
+pbctl workspace system-requirements list
+```
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path` | `-m` | Path to `pixi.toml` or `pyproject.toml` |
+
+## Examples
+
+```bash
+# Add conda-forge and pytorch channels
+pbctl workspace channel add conda-forge pytorch
+
+# List configured channels
+pbctl workspace channel list
+
+# Remove a channel
+pbctl workspace channel remove pytorch
+
+# Add target platforms
+pbctl workspace platform add linux-aarch64
+
+# List target platforms
+pbctl workspace platform list
+
+# Set the workspace description
+pbctl workspace description set "My data science workspace"
+
+# Set the workspace version
+pbctl workspace version set 1.0.0
+
+# Bump the patch version (1.0.0 -> 1.0.1)
+pbctl workspace version patch
+
+# Add a new environment with features
+pbctl workspace environment add test
+
+# List environments
+pbctl workspace environment list
+
+# Remove an environment
+pbctl workspace environment remove test
+
+# List features
+pbctl workspace feature list
+
+# Export as a conda environment file
+pbctl workspace export conda-environment
+
+# Export as a conda explicit spec
+pbctl workspace export conda-explicit-spec
+
+# Get the workspace name
+pbctl workspace name get
+
+# Set the workspace name
+pbctl workspace name set my-project
+
+# Add a system requirement
+pbctl workspace system-requirements add "cuda>=12.0"
+
+# List system requirements
+pbctl workspace system-requirements list
+
+# Use the project alias
+pbctl project channel list
+```

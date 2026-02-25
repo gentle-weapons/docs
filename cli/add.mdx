@@ -1,0 +1,116 @@
+---
+title: "pbctl add"
+description: "Add conda or PyPI dependencies to the workspace."
+---
+
+# pbctl add
+
+Adds dependencies to the workspace. Dependencies can be conda packages (default) or PyPI packages (with `--pypi`). If no version is specified, the latest compatible version is chosen automatically.
+
+Versions are pinned using a strategy based on semantic versioning by default. Some well-known packages (Python, Rust, Julia, GCC, NodeJS, etc.) use minor-version pinning instead.
+
+**Alias:** `a`
+
+## Usage
+
+```bash
+pbctl add [OPTIONS] <SPEC>...
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `SPEC` | One or more package specifications. Conda MatchSpecs (e.g., `python=3.12`) or PyPI requirements (e.g., `requests>=2.28`). |
+
+## Options
+
+### Dependency Type
+
+| Option | Description |
+|---|---|
+| `--pypi` | Add as a PyPI dependency instead of a conda dependency. |
+| `--editable` | Install the PyPI package in editable mode. Requires `--pypi`. |
+
+### Targeting
+
+| Option | Description |
+|---|---|
+| `-p`, `--platform <PLATFORM>` | Add the dependency only for specific platform(s). Can be specified multiple times. |
+| `-f`, `--feature <FEATURE>` | Add the dependency to a specific feature (default: the default feature). |
+
+### Git Dependencies
+
+| Option | Description |
+|---|---|
+| `-g`, `--git <URL>` | Git URL for a git-based dependency. |
+| `--branch <BRANCH>` | Git branch to use. Requires `--git`. |
+| `--tag <TAG>` | Git tag to use. Requires `--git`. |
+| `--rev <REV>` | Git revision (commit hash) to use. Requires `--git`. |
+| `-s`, `--subdir <SUBDIR>` | Subdirectory within the git repository. Requires `--git`. |
+
+### Update Options
+
+| Option | Description |
+|---|---|
+| `--no-install` | Only modify the lock file, do not install the environment. |
+| `--frozen` | Use the lockfile as-is, do not update it. |
+| `--locked` | Require the lockfile to be up-to-date, abort if not. |
+
+### Global Options
+
+| Option | Description |
+|---|---|
+| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+
+## Examples
+
+### Add a conda package
+
+```bash
+pbctl add python
+```
+
+### Add a conda package with a version constraint
+
+```bash
+pbctl add "python=3.12"
+pbctl add "numpy>=1.24"
+```
+
+### Add multiple packages at once
+
+```bash
+pbctl add python numpy pandas scikit-learn
+```
+
+### Add a PyPI package
+
+```bash
+pbctl add --pypi requests
+pbctl add --pypi "boto3>=1.28"
+```
+
+### Add a platform-specific dependency
+
+```bash
+pbctl add cudatoolkit --platform linux-aarch64
+```
+
+### Add a dependency to a feature
+
+```bash
+pbctl add --feature test pytest pytest-cov
+```
+
+### Add a git-based dependency
+
+```bash
+pbctl add --git https://github.com/user/repo --branch main mypackage
+```
+
+### Add an editable PyPI dependency
+
+```bash
+pbctl add --pypi --editable "mylib @ file:///path/to/mylib"
+```

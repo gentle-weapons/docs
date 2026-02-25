@@ -1,0 +1,84 @@
+---
+title: "pbctl clean"
+description: "Clean workspace environments and caches."
+---
+
+# pbctl clean
+
+Removes environment directories and caches. When run without a subcommand, it cleans the `.pixi` folder of the current workspace, removing all installed environments. Use the `cache` subcommand to clean the global package cache.
+
+## Usage
+
+```bash
+pbctl clean [OPTIONS]
+pbctl clean cache [CACHE_OPTIONS]
+```
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--environment <ENV>` | `-e` | Only remove the specified environment instead of all environments. |
+| `--activation-cache` | | Only remove the activation cache. |
+| `--build` | | Only remove the build cache. |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+
+## Subcommand: `pbctl clean cache`
+
+Removes cached packages from the global cache directory. Without any flags, removes the entire cache (after confirmation).
+
+### Cache Options
+
+| Option | Description |
+|---|---|
+| `--pypi` | Clean only the PyPI package cache. |
+| `--conda` | Clean only the conda package cache. |
+| `--repodata` | Clean only the repodata cache. |
+| `--mapping` | Clean only the conda-PyPI mapping cache. |
+| `--exec` | Clean only the `exec` temporary environment cache. |
+| `--build-backends` | Clean only the build backend environments cache. |
+| `--build` | Clean only build-related caches (git, work dirs, backends, source builds). |
+| `--yes` / `-y` | Answer yes to all confirmation prompts. |
+
+## Examples
+
+Clean all environments in the current workspace:
+
+```bash
+pbctl clean
+```
+
+Clean a specific environment:
+
+```bash
+pbctl clean --environment test
+```
+
+Clean the entire global cache:
+
+```bash
+pbctl clean cache --yes
+```
+
+Clean only the conda package cache:
+
+```bash
+pbctl clean cache --conda
+```
+
+Clean temporary exec environments:
+
+```bash
+pbctl clean cache --exec
+```
+
+Clean build-related caches:
+
+```bash
+pbctl clean cache --build
+```

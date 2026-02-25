@@ -1,0 +1,88 @@
+---
+title: "pbctl probe"
+description: "Detect NVIDIA Jetson hardware and report system profile information."
+---
+
+# pbctl probe
+
+Detects NVIDIA Jetson hardware on the current system and reports a detailed hardware profile. Use this command to verify that your Jetson device is recognized correctly before setting up workspaces, configuring system requirements, or troubleshooting platform-specific issues.
+
+## Usage
+
+```bash
+pbctl probe [OPTIONS]
+```
+
+## Options
+
+| Option   | Default | Description                    |
+| -------- | ------- | ------------------------------ |
+| `--json` | `true`  | Output results in JSON format  |
+
+## Output
+
+When Jetson hardware is detected, the command outputs a JSON object containing a `JetsonProfile` with the following fields:
+
+| Field                | Type              | Description                                                                                                  | Example              |
+| -------------------- | ----------------- | ------------------------------------------------------------------------------------------------------------ | -------------------- |
+| `arch`               | String            | CPU architecture of the system                                                                                | `"aarch64"`          |
+| `l4t`                | String or null    | Linux for Tegra (L4T) version. Queried from the `nvidia-l4t-core` dpkg package on JetPack 6+, or read from `/etc/nv_tegra_release` on older releases | `"36.4.0"`           |
+| `jetpack`            | String or null    | NVIDIA JetPack SDK version corresponding to the installed L4T release                                         | `"6.1"`              |
+| `cuda`               | String or null    | CUDA driver version. Read from `/proc/driver/nvidia/version`, falling back to `nvidia-smi` if unavailable      | `"12.2"`             |
+| `module`             | String or null    | Jetson module name, read from `/proc/device-tree/model`                                                        | `"Jetson Orin Nano"` |
+| `compute_capability` | String or null    | CUDA compute capability of the GPU                                                                             | `"8.7"`              |
+
+Fields shown as "String or null" will be `null` in the JSON output when the value cannot be determined (for example, when the corresponding file or package is not present).
+
+## Supported Hardware
+
+Currently supports the Jetson Orin Nano with JetPack 6 (L4T R36.x). Support for additional Jetson modules and JetPack versions is coming soon.
+
+## Examples
+
+### Jetson Orin Nano
+
+```bash
+pbctl probe
+```
+
+```json
+{
+  "arch": "aarch64",
+  "l4t": "36.4.0",
+  "jetpack": "6.1",
+  "cuda": "12.2",
+  "module": "Jetson Orin Nano",
+  "compute_capability": "8.7"
+}
+```
+
+### Non-Jetson System
+
+On a system without Jetson hardware, the command returns a profile with null values for hardware-specific fields:
+
+```bash
+pbctl probe
+```
+
+```json
+{
+  "arch": "x86_64",
+  "l4t": null,
+  "jetpack": null,
+  "cuda": null,
+  "module": null,
+  "compute_capability": null
+}
+```
+
+## Integration with System Requirements
+
+You can use the L4T version reported by `pbctl probe` to configure system requirements in your `pixi.toml`. This ensures that packages requiring a specific L4T release are resolved correctly:
+
+```toml
+[system-requirements]
+l4t = "36.4.0"
+```
+
+Run `pbctl probe` first to confirm the L4T version on your device, then set the value in `pixi.toml` to match.

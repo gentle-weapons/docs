@@ -1,0 +1,63 @@
+---
+title: "pbctl import"
+description: "Import an environment file into a workspace."
+---
+
+# pbctl import
+
+Imports a file into an environment in an existing workspace. Supports conda `environment.yml` files and pip `requirements.txt` files. The imported dependencies, channels, and platforms are added to the workspace manifest.
+
+If `--format` is not specified, each supported format is tried in order until one succeeds.
+
+## Usage
+
+```bash
+pbctl import [OPTIONS] <FILE>
+```
+
+## Arguments
+
+| Argument | Description |
+|---|---|
+| `<FILE>` | Path to the file to import (e.g., `environment.yml` or `requirements.txt`). |
+
+## Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--environment <ENV>` | `-e` | Name of the environment to import into. If the environment does not exist, it is created. Defaults to the name from the input file (conda-env format). |
+| `--feature <FEATURE>` | `-f` | Name of the feature to create for the imported dependencies. Defaults to the environment name. |
+| `--format <FORMAT>` | | Explicitly set the input file format: `conda-env` or `pypi-txt`. If not given, formats are tried automatically. |
+| `--platform <PLATFORM>` | `-p` | Platforms to add for the imported environment. Can be specified multiple times. |
+
+## Global Options
+
+| Option | Short | Description |
+|---|---|---|
+| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+
+## Examples
+
+Import a conda environment file:
+
+```bash
+pbctl import environment.yml
+```
+
+Import into a named environment:
+
+```bash
+pbctl import --environment ml environment.yml
+```
+
+Import a pip requirements file:
+
+```bash
+pbctl import --format pypi-txt --environment web requirements.txt
+```
+
+Import with specific platforms:
+
+```bash
+pbctl import --platform linux-aarch64 environment.yml
+```

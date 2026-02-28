@@ -5,21 +5,21 @@ description: How jnc uses lock files for reproducible environments.
 
 # Lock File
 
-jnc automatically generates and maintains a `pixi.lock` file in your workspace. The lock file records the exact versions and hashes of every package resolved for each environment and platform, ensuring fully reproducible builds.
+jnc automatically generates and maintains a `jnc.lock` file in your workspace. The lock file records the exact versions and hashes of every package resolved for each environment and platform, ensuring fully reproducible builds.
 
 ## How it works
 
-1. When you run `jnc add`, `jnc install`, or any command that modifies dependencies, jnc solves the environment and writes the results to `pixi.lock`.
+1. When you run `jnc add`, `jnc install`, or any command that modifies dependencies, jnc solves the environment and writes the results to `jnc.lock`.
 2. The lock file contains the exact version, build string, and content hash for every package.
 3. On subsequent installs, jnc reads the lock file and installs the exact same packages — no re-solving required.
 
 ## Committing the lock file
 
-**Always commit `pixi.lock` to version control.** This ensures that every developer and CI system gets the same environment.
+**Always commit `jnc.lock` to version control.** This ensures that every developer and CI system gets the same environment.
 
 ```
-pixi.toml     # Source of truth for dependency constraints
-pixi.lock     # Exact resolved versions (auto-generated)
+jnc.toml     # Source of truth for dependency constraints
+jnc.lock     # Exact resolved versions (auto-generated)
 ```
 
 ## Updating the lock file
@@ -30,7 +30,7 @@ pixi.lock     # Exact resolved versions (auto-generated)
 jnc update
 ```
 
-Re-solves all dependencies within the constraints defined in `pixi.toml` and updates the lock file.
+Re-solves all dependencies within the constraints defined in `jnc.toml` and updates the lock file.
 
 ### Update specific packages
 
@@ -75,4 +75,4 @@ The lock file contains solutions for every platform listed in your manifest:
 platforms = ["linux-aarch64"]
 ```
 
-The `linux-aarch64` platform is solved and recorded in `pixi.lock`, targeting NVIDIA Jetson (JetPack 6) devices. Additional platforms may be supported in the future.
+The `linux-aarch64` platform is solved and recorded in `jnc.lock`, targeting NVIDIA Jetson (JetPack 6) devices. Additional platforms may be supported in the future.

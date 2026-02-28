@@ -35,7 +35,7 @@ jnc init my-jetson-app
 cd my-jetson-app
 ```
 
-This creates a `pixi.toml` manifest file that defines your workspace's dependencies, tasks, and target platform.
+This creates a `jnc.toml` manifest file that defines your workspace's dependencies, tasks, and target platform.
 
 ## Add dependencies
 
@@ -45,13 +45,13 @@ Install packages from the conda ecosystem:
 jnc add python numpy opencv
 ```
 
-This resolves compatible versions, updates the manifest, and creates a lock file (`pixi.lock`) for reproducibility.
+This resolves compatible versions, updates the manifest, and creates a lock file (`jnc.lock`) for reproducibility.
 
 ## Set system requirements
 
 Specify the L4T version your workspace requires. This ensures dependency resolution picks packages compatible with your Jetson:
 
-Edit `pixi.toml` and add:
+Edit `jnc.toml` and add:
 
 ```toml
 [system-requirements]
@@ -92,7 +92,7 @@ exit
 
 ## What's in the manifest?
 
-After these steps, your `pixi.toml` looks something like:
+After these steps, your `jnc.toml` looks something like:
 
 ```toml
 [project]

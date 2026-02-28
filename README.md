@@ -1,4 +1,4 @@
-# Gentle Weapons Documentation
+# jnc Documentation
 
 jnc documentation — a fast, reproducible package manager for NVIDIA Jetson.
 

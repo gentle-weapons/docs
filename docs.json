@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Gentle Weapons",
+  "name": "jnc",
   "theme": "maple",
   "colors": {
     "primary": "#2563EB",
@@ -14,7 +14,7 @@
         "groups": [
           {
             "group": "Getting Started",
-            "pages": ["introduction", "installation", "quickstart", "basic-usage"]
+            "pages": ["introduction", "quickstart", "basic-usage", "acknowledgements"]
           },
           {
             "group": "Concepts",

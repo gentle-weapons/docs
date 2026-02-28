@@ -5,7 +5,7 @@ description: "Create a new workspace with a manifest file and project scaffoldin
 
 # jnc init
 
-Creates a new workspace. This command generates a manifest file (`pixi.toml` by default) and supporting files to get you started with dependency management and task running.
+Creates a new workspace. This command generates a manifest file (`jnc.toml` by default) and supporting files to get you started with dependency management and task running.
 
 The manifest format can be customized with `--format` to generate a `pyproject.toml` instead. You can also bootstrap a workspace from an existing conda `environment.yml` file.
 
@@ -28,7 +28,7 @@ jnc init [OPTIONS] [PATH]
 | `-c`, `--channel <CHANNEL>` | Channel to use in the workspace. Can be specified multiple times. Conflicts with `--import`. |
 | `-p`, `--platform <PLATFORM>` | Platforms that the workspace supports. Can be specified multiple times. |
 | `-i`, `--import <ENVIRONMENT_FILE>` | Path to a conda `environment.yml` file to bootstrap the workspace from. |
-| `--format <FORMAT>` | The manifest format to create. Values: `pixi`, `pyproject`. Conflicts with `--import`. |
+| `--format <FORMAT>` | The manifest format to create. Values: `jnc`, `pyproject`. Conflicts with `--import`. |
 | `-s`, `--scm <SCM>` | Source control management provider. Generates appropriate `.gitignore` and `.gitattributes` files. Values: `github`, `gitlab`, `codeberg`. |
 | `--conda-pypi-map <MAPPING>` | Mapping between conda channels and PyPI indexes, as comma-separated `CHANNEL=URL` pairs. |
 

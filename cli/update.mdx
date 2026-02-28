@@ -5,7 +5,7 @@ description: "Update dependencies in the lock file."
 
 # jnc update
 
-Checks if there are newer versions of dependencies and updates the `pixi.lock` file and environments accordingly. Only updates packages to versions still compatible with the version constraints defined in the manifest.
+Checks if there are newer versions of dependencies and updates the `jnc.lock` file and environments accordingly. Only updates packages to versions still compatible with the version constraints defined in the manifest.
 
 If no packages are specified, all packages are updated. You can scope updates to specific environments and platforms.
 
@@ -35,7 +35,7 @@ jnc update [OPTIONS] [PACKAGES]...
 
 | Option | Short | Description |
 |---|---|---|
-| `--manifest-path <PATH>` | `-m` | Path to `pixi.toml` or the workspace directory. |
+| `--manifest-path <PATH>` | `-m` | Path to `jnc.toml` or the workspace directory. |
 
 ## Examples
 

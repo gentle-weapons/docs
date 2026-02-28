@@ -33,7 +33,7 @@ jnc run [OPTIONS] [TASK]...
 | `-x`, `--executable` | Execute the command as a raw executable, bypassing task resolution. Useful when a task name and an executable share the same name. |
 | `--clean-env` | Run with a clean environment, ignoring variables from the current shell. |
 | `--skip-deps` | Do not run the task's `depends-on` dependencies. |
-| `--templated` | Enable template rendering for command arguments (e.g., `{{ pixi.platform }}`). |
+| `--templated` | Enable template rendering for command arguments (e.g., `{{ jnc.platform }}`). |
 | `-n`, `--dry-run` | Print the command that would be run without executing it. |
 
 ### Update Options
@@ -49,7 +49,7 @@ jnc run [OPTIONS] [TASK]...
 
 | Option | Description |
 |---|---|
-| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+| `-m`, `--manifest-path <PATH>` | Path to `jnc.toml`, `pyproject.toml`, or the workspace directory. |
 
 ## Examples
 

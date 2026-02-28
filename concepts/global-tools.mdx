@@ -43,7 +43,7 @@ jnc global uninstall ripgrep
 
 ## The global manifest
 
-Global installations are tracked in a manifest file at `~/.pixi/manifests/pixi-global.toml`. You can edit it directly:
+Global installations are tracked in a manifest file at `~/.jnc/manifests/jnc-global.toml`. You can edit it directly:
 
 ```bash
 jnc global edit
@@ -59,7 +59,7 @@ This makes it easy to share your global tool configuration across machines — j
 
 ## Exposed binaries
 
-When you install a global tool, jnc automatically exposes the package's binaries on your `PATH` via lightweight trampolines in `~/.pixi/bin/`.
+When you install a global tool, jnc automatically exposes the package's binaries on your `PATH` via lightweight trampolines in `~/.jnc/bin/`.
 
 You can manage which binaries are exposed:
 

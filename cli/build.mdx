@@ -5,7 +5,7 @@ description: "Build a conda package from the workspace."
 
 # jnc build
 
-Builds a conda package from the workspace. This uses the build configuration defined in `pixi.toml` to produce a `.conda` package file that can be uploaded to a channel or installed elsewhere.
+Builds a conda package from the workspace. This uses the build configuration defined in `jnc.toml` to produce a `.conda` package file that can be uploaded to a channel or installed elsewhere.
 
 ## Usage
 
@@ -18,7 +18,7 @@ jnc build [OPTIONS]
 | Option | Short | Description |
 |---|---|---|
 | `--output-dir` | | Directory to place the built package (defaults to current directory) |
-| `--manifest-path` | `-m` | Path to `pixi.toml` or `pyproject.toml` |
+| `--manifest-path` | `-m` | Path to `jnc.toml` or `pyproject.toml` |
 
 ## Examples
 
@@ -30,5 +30,5 @@ jnc build
 jnc build --output-dir ./dist
 
 # Build using a specific manifest
-jnc build --manifest-path /path/to/pixi.toml
+jnc build --manifest-path /path/to/jnc.toml
 ```

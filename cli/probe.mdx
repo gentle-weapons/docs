@@ -78,11 +78,11 @@ jnc probe
 
 ## Integration with System Requirements
 
-You can use the L4T version reported by `jnc probe` to configure system requirements in your `pixi.toml`. This ensures that packages requiring a specific L4T release are resolved correctly:
+You can use the L4T version reported by `jnc probe` to configure system requirements in your `jnc.toml`. This ensures that packages requiring a specific L4T release are resolved correctly:
 
 ```toml
 [system-requirements]
 l4t = "36.4.0"
 ```
 
-Run `jnc probe` first to confirm the L4T version on your device, then set the value in `pixi.toml` to match.
+Run `jnc probe` first to confirm the L4T version on your device, then set the value in `jnc.toml` to match.

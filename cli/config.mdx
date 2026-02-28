@@ -5,7 +5,7 @@ description: "Manage jnc configuration files at system, global, and local scopes
 
 # jnc config
 
-Manages jnc configuration files. Configuration can be set at three scopes: **system** (machine-wide), **global** (user-wide), and **local** (workspace-specific via `pixi.toml`).
+Manages jnc configuration files. Configuration can be set at three scopes: **system** (machine-wide), **global** (user-wide), and **local** (workspace-specific via `jnc.toml`).
 
 ## Usage
 
@@ -77,7 +77,7 @@ jnc config prepend <KEY> <VALUE>
 
 | Option | Short | Description |
 |---|---|---|
-| `--manifest-path` | `-m` | Path to `pixi.toml` or `pyproject.toml` |
+| `--manifest-path` | `-m` | Path to `jnc.toml` or `pyproject.toml` |
 
 ## Configuration Scopes
 
@@ -85,7 +85,7 @@ jnc config prepend <KEY> <VALUE>
 |---|---|
 | **system** | Machine-wide configuration, applies to all users |
 | **global** | User-wide configuration, applies to all workspaces |
-| **local** | Workspace-specific configuration, stored in `pixi.toml` |
+| **local** | Workspace-specific configuration, stored in `jnc.toml` |
 
 When the same key is set at multiple scopes, the most specific scope wins: local overrides global, which overrides system.
 

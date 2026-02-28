@@ -5,7 +5,7 @@ description: "Solve the environment and update the lock file without installing.
 
 # jnc lock
 
-Solves all environments defined in the workspace manifest and writes an updated `pixi.lock` file. Unlike `jnc install`, this command does not install any packages into an environment prefix -- it only computes and persists the dependency resolution.
+Solves all environments defined in the workspace manifest and writes an updated `jnc.lock` file. Unlike `jnc install`, this command does not install any packages into an environment prefix -- it only computes and persists the dependency resolution.
 
 This is useful in CI workflows, validation checks, or when you want to preview what would change before installing.
 
@@ -28,7 +28,7 @@ jnc lock [OPTIONS]
 
 | Option | Description |
 |---|---|
-| `-m`, `--manifest-path <PATH>` | Path to `pixi.toml`, `pyproject.toml`, or the workspace directory. |
+| `-m`, `--manifest-path <PATH>` | Path to `jnc.toml`, `pyproject.toml`, or the workspace directory. |
 
 ## Examples
 

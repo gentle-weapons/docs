@@ -5,7 +5,22 @@ description: Set up your first jnc workspace on a Jetson Orin Nano.
 
 # Quickstart
 
-This guide walks you through creating your first workspace on a Jetson device, adding dependencies, and running code.
+This guide walks you through installing jnc on your Jetson device, creating your first workspace, adding dependencies, and running code.
+
+## Install jnc
+
+Run the following on your Jetson:
+
+```bash
+curl -L https://github.com/gentle-weapons/jnc-releases/releases/latest/download/pbctl-aarch64-unknown-linux-gnu.tar.gz | tar -xz
+sudo mv pbctl /usr/local/bin/jnc
+```
+
+Verify the installation:
+
+```bash
+jnc --version
+```
 
 ## Verify your hardware
 

@@ -7,6 +7,11 @@
     "light": "#60A5FA",
     "dark": "#1E40AF"
   },
+  "analytics": {
+    "reddit": {
+      "advertiserId": "a2_ighwg3q798ti"
+    }
+  },
   "navigation": {
     "tabs": [
       {
